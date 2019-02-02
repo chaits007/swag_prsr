@@ -1,0 +1,338 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "AccountSummary_GET",
+    "version" : "1.0.0",
+	"description": "AccountSummary_GET"
+  },
+  "basePath" : "/fanviews/{{securityChannel}}/{{system}}/{{tenant}}/v2",
+  "paths" : {
+    "/fund-sponsors/{fundSponsorId}/accounts/summary" : {
+      "get" : {
+        "summary" : "Retrieve information for all accounts for a customer. <br/> Note:  Portfolio is for a shareholder and book-of-business is for a financial-institution representative.",
+        "operationId" : "AccountsController.getAccounts",
+        "parameters" : [ {
+          "name" : "fundSponsorId",
+          "in" : "path",
+          "description" : "Unique ID  for a fund sponsor.<br/><br/> Max Length: 5<br /> Min Length: 1",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "authorizationContext",
+          "in" : "header",
+          "description" : "authorizationContext is required for TA-SHD-* roles only.<br/> authorizationContext is optional for OPR role (if not present, will use id from basic auth).",
+          "required" : true,
+          "type" : "string"
+        },
+		{
+			"name": "Accept",
+			"in": "header",
+			"description": "Specify as <code>application/json</code>.",
+			"required": false,
+			"type": "string",
+			"default": "application/json"
+		},
+		{
+			"name": "Content-Type",
+			"in": "header",
+			"description": "Specify as <code>application/json</code>.",
+			"required": false,
+			"type": "string",
+			"default": "application/json"
+		},
+		{
+			"name": "Authorization",
+			"in": "header",
+			"description": "Specify as <code>application/json</code>.",
+			"required": false,
+			"type": "string",
+			"default": "Basic RFM1TTozRURDQ0RFMw=="
+		}
+		],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/AssetAccountsResponseDTOV2"
+            }
+          },
+          "400" : {
+            "description" : "Client Errors",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorBean"
+            }
+          }
+        },
+        "x-serviceName" : "Get All Account Information",
+        "description" : "<b>Function:</b><br/>\n                  Retrieve information for all accounts for a customer.",
+        "x-dataAccessComponents" : [ "VIEW1105 - K009P0", "VIEW3459 - T485P0" ],
+        "x-securityModelComponents" : [ ],
+        "x-errors" : [ {
+          "x-severity" : "Error",
+          "x-code" : "INTEGER_DIGITS",
+          "x-message" : "expected a number with up to 5 digits",
+          "x-fieldName" : "fundSponsorId"
+        }, {
+          "x-severity" : "Error",
+          "x-code" : "MIN_VALUE",
+          "x-message" : "must be greater than or equal to 1",
+          "x-fieldName" : "fundSponsorId"
+        } ],
+        "x-dstWsdl" : "",
+        "x-dstRestriction" : "",
+        "x-apim-category" : "Investment Position",
+        "x-apim-subcategory" : "Account"
+      }
+    }
+  },
+  "definitions" : {
+    "AssetAllocationTaxIdentificationAccount" : {
+      "properties" : {
+        "certificationCode" : {
+          "description" : "A code denoting the status of the SSN.<br/> <br/> Valid Values: <ul> <li>0-9</li> </ul> <br/> Notes: <ul> <li>0 = SS_MISSING</li> <li>1 = SSN_NON_CERTIFIED</li> <li>2 = SSN_CERTIFIED</li> <li>3 = TIN_NON_CERTIFIED</li> <li>4 = TIN_CERTIFIED</li> <li>5 = SS_APPLIED</li> <li>6 = SSN_IRS_OFFENDER</li> <li>7 = TIN_IRS_OFFENDER</li> <li>8 = SSN_ACCOUNT_TYPE_EXEMPT</li> <li>9 = TIN_ACCOUNT_TYPE_EXEMPT</li> </ul>",
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "certificationText" : {
+          "description" : "The text describing the status of the SSN.<br/> <br/> Valid Values: <ul> <li>Missing</li> <li>SSN Non-Certified</li> <li>SSN Certified</li> <li>TIN Non-Certified</li> <li>TIN Certified</li> <li>SSN Applied</li> <li>SSN IRS Offender</li> <li>TIN IRS Offender</li> <li>SSN Account Type Exempt</li> <li>TIN Account Type Exempt</li> </ul> <br/> Notes: See certificationCode for mapping to numeric values.",
+          "type" : "string",
+          "enum" : [ "Missing", "SSNNonCertified", "SSNCertified", "TINNonCertified", "TINCertified", "SSNApplied", "SSNIRSOffender", "TINIRSOffender", "SSNAccountTypeExempt", "TINAccountTypeExempt" ]
+        },
+        "isInconsistentCertificationCode" : {
+          "description" : "The value for the related parameter is NOT consistent across the positions. See<b> General Description For ...Inconsistent... Response Parameters</b> in the API description above.",
+          "type" : "boolean"
+        },
+        "isInconsistentCertificationText" : {
+          "description" : "The value for the related parameter is NOT consistent across the positions. See<b> General Description For ...Inconsistent... Response Parameters</b> in the API description above.",
+          "type" : "boolean"
+        },
+        "isInconsistentNumber" : {
+          "description" : "The value for the related parameter is NOT consistent across the positions. See <b>General Description For ...Inconsistent... Response Parameters</b> in the API description above.",
+          "type" : "boolean"
+        },
+        "isInconsistentType" : {
+          "description" : "The value for the related parameter is NOT consistent across the positions. See<b> General Description For ...Inconsistent... Response Parameters</b> in the API description above.",
+          "type" : "boolean"
+        },
+        "number" : {
+          "description" : "A unique number assigned by the IRS to identify a taxable entity.",
+          "type" : "string"
+        },
+        "type" : {
+          "description" : "Indicates the type of Tax ID.<br/> <br/> Valid Values: <ul> <li>EIN</li> <li>SSN</li> </ul>",
+          "type" : "string",
+          "enum" : [ "EIN", "SSN" ]
+        }
+      }
+    },
+    "AssetAccountSummary" : {
+      "properties" : {
+        "accountId" : {
+          "description" : "Unique ID used to identify a specific account(legal owner).<br/> <br/> Format: Legal Owner ID1 (Max 11 digits) + Legal Owner ID2 (Max 11 digits)",
+          "type" : "string"
+        },
+        "accountNumber" : {
+          "description" : "A number that identifies an investor's position within a fund.",
+          "type" : "string"
+        },
+        "accountValue" : {
+          "description" : "The total value of the account (legal ownership).<br/> <br/> Max 17 digits with max 2 decimal points. <br/> <br/> Ex : 99999999999.99",
+          "format" : "double",
+          "type" : "number"
+        },
+        "dealerOfRecord" : {
+          "description" : "Dealer of record information.",
+          "$ref" : "#/definitions/DealerOfRecordAccount"
+        },
+        "fiduciary" : {
+          "description" : "Fiduciary details.",
+          "$ref" : "#/definitions/AssetFiduciary"
+        },
+        "firmAccountNumber" : {
+          "description" : "The ID used by the fund group financial institution to identify the mutual fund account associated with NSCC requests.",
+          "type" : "string"
+        },
+        "hasAllocationModel" : {
+          "description" : "If true, there is an allocation model associated with the investment.",
+          "type" : "boolean"
+        },
+        "hasStopMail" : {
+          "description" : "If true, has a 'stop mail' restriction.",
+          "type" : "boolean"
+        },
+        "hasStopPurchase" : {
+          "description" : "If true, has a 'stop purchase' restriction.",
+          "type" : "boolean"
+        },
+        "hasTuitionSavingsPlanCode" : {
+          "description" : "If true, the fund is a Tuitions Savings Plan (529) fund.",
+          "type" : "boolean"
+        },
+        "isFiduciaryAccount" : {
+          "description" : "If true, the position is fiduciary (529 or retirement).",
+          "type" : "boolean"
+        },
+        "isInconsistentAccountNumber" : {
+          "description" : "The value for the related parameter is NOT consistent across the positions. See <b>General Description For ...Inconsistent... Response Parameters</b> in the API description above.",
+          "type" : "boolean"
+        },
+        "isInconsistentFirmAccountNumber" : {
+          "description" : "The value for the related parameter is NOT consistent across the positions. See<b> General Description For ...Inconsistent... Response Parameters</b> in the API description above.",
+          "type" : "boolean"
+        },
+        "isOpenAccount" : {
+          "description" : "If true, at least one position is open.",
+          "type" : "boolean"
+        },
+        "registration" : {
+          "description" : "Registration details.",
+          "$ref" : "#/definitions/Registration"
+        },
+        "socialCode" : {
+          "description" : "Identifies the type of account that is being returned.<br/> <br/> Max 3 digits<br/> Example: IRA Account",
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "taxIdentification" : {
+          "description" : "Tax ID details associated with the specified entry.",
+          "$ref" : "#/definitions/AssetAllocationTaxIdentificationAccount"
+        }
+      }
+    },
+    "AssetAccountsResponseDTOV2" : {
+      "properties" : {
+        "accounts" : {
+          "description" : "List of accounts (legal owners).",
+          "items" : {
+            "$ref" : "#/definitions/AssetAccountSummary"
+          },
+          "type" : "array"
+        },
+        "errorList" : {
+          "description" : "",
+          "items" : {
+            "$ref" : "#/definitions/ErrorBean"
+          },
+          "type" : "array"
+        },
+        "hasEscheatmentLetters" : {
+          "description" : "If true, escheatment due diligence letters exist for the customer.",
+          "type" : "boolean"
+        },
+        "totalPortfolioValue" : {
+          "description" : "Returns the sum of the account values within the portfolio.<br/> <br/> Max 17 digits with max 2 decimal points. <br/> <br/> Ex : 99999999999.99",
+          "format" : "double",
+          "type" : "number"
+        }
+      }
+    },
+    "Registration" : {
+      "properties" : {
+        "address" : {
+          "description" : "Address Information.",
+          "items" : {
+            "type" : "string"
+          },
+          "type" : "array"
+        },
+        "detail" : {
+          "description" : "Registration details for the account (legal owner).",
+          "items" : {
+            "type" : "string"
+          },
+          "type" : "array"
+        }
+      }
+    },
+    "ErrorBean" : {
+      "properties" : {
+        "ERROR" : {
+          "description" : "",
+          "type" : "string"
+        },
+        "INFO" : {
+          "description" : "",
+          "type" : "string"
+        },
+        "WARNING" : {
+          "description" : "",
+          "type" : "string"
+        },
+        "errorCode" : {
+          "description" : "",
+          "type" : "string"
+        },
+        "errorMessage" : {
+          "description" : "",
+          "type" : "string"
+        },
+        "errorSeverity" : {
+          "description" : "",
+          "type" : "string"
+        },
+        "field" : {
+          "description" : "",
+          "type" : "string"
+        },
+        "objectName" : {
+          "description" : "",
+          "type" : "string"
+        },
+        "rejectedValue" : {
+          "description" : "",
+          "type" : "string"
+        }
+      }
+    },
+    "DealerOfRecordAccount" : {
+      "properties" : {
+        "branchNumber" : {
+          "description" : "The dealer branch number associated with the Mutual Fund account.",
+          "type" : "string"
+        },
+        "dealerNumber" : {
+          "description" : "Internally assigned unique ID representing the financial institution.",
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "isInconsistentBranchNumber" : {
+          "description" : "The value for the related parameter is NOT consistent across the positions. See<b> General Description For ...Inconsistent... Response Parameters</b> in the API description above.",
+          "type" : "boolean"
+        },
+        "isInconsistentDealerNumber" : {
+          "description" : "The value for the related parameter is NOT consistent across the positions. See<b> General Description For ...Inconsistent... Response Parameters</b> in the API description above.",
+          "type" : "boolean"
+        },
+        "isInconsistentRepresentativeNumber" : {
+          "description" : "The value for the related parameter is NOT consistent across the positions. See<b> General Description For ...Inconsistent... Response Parameters</b> in the API description above.",
+          "type" : "boolean"
+        },
+        "representativeNumber" : {
+          "description" : "The representative number associated with the Mutual Fund account.",
+          "type" : "string"
+        }
+      }
+    },
+    "AssetFiduciary" : {
+      "properties" : {
+        "fiduciaryPlanType" : {
+          "description" : "Indicates the type of fiduciary account defined by the IRS.<br/> <br/> Valid Values: <ul> <li>0-18</li> </ul> <br/> Notes: <ul> <li>0=UNKNOWN</li> <li>1=KEOGH</li> <li>2=BENEFIT</li> <li>3=IRA</li> <li>4=IRA_SPOUSAL</li> <li>5=DEFERRED</li> <li>6=IRA_SEP</li> <li>7=DEFERRED_403B</li> <li>8=401K</li> <li>9=SIMPLE_IRA</li> <li>10=CONVERSION_ROTH_IRA</li> <li>11=CONTRIBUTRY_ROTH_IRA</li> <li>12=EDUCATIONAL_IRA</li> <li>13=SAR_SEP</li> <li>14=GROUP_IRA</li> <li>15=NON_QUALIFIED</li> <li>16=SIMPLE_401K</li> <li>17=CASH_BALANCE</li> <li>18=401A_TAX_EXEMPT</li> </ul>",
+          "type" : "string"
+        },
+        "fiduciaryPlanTypeText" : {
+          "description" : "Text describing the fiduciary plan type.<br/> <br/> Valid Values: <ul> <li>Unknown</li> <li>KEOGH</li> <li>BENEFIT</li> <li>IRA</li> <li>IRA SPOUSAL</li> <li>DEFERRED</li> <li>IRA SEP</li> <li>DEFERRED 403B</li> <li>401K</li> <li>SIMPLE IRA</li> <li>CONVERSION ROTH IRA</li> <li>CONTRIBUTRY ROTH IRA</li> <li>EDUCATIONAL IRA</li> <li>SAR SEP</li> <li>GROUP IRA</li> <li>NON QUALIFIED</li> <li>SIMPLE 401K</li> <li>CASH BALANCE</li> <li>401A TAX EXEMPT</li> </ul> <br/> Notes: See  fiduciaryplanType for mapping to numeric values.",
+          "type" : "string",
+          "enum" : [ "Unknown", "KEOGH", "Benefit", "IRA", "IRASpousal", "Deferred", "IRASEP", "Deferred403B", "_401K", "SimpleIRA", "ConversionRothIRA", "ContributoryRothIRA", "EducationalIRA", "SARSEP", "GroupIRA", "NonQualified", "Simple401K", "CashBalance", "_401ATaxExempt" ]
+        },
+        "isInconsistentFiduciaryPlanType" : {
+          "description" : "The value for the related parameter is NOT consistent across the positions. See<b> General Description For ...Inconsistent... Response Parameters</b> in the API description above.",
+          "type" : "boolean"
+        },
+        "isInconsistentFiduciaryPlanTypeText" : {
+          "description" : "The value for the related parameter is NOT consistent across the positions. <b>See General Description for ...Inconsistent... Response Parameters</b> in the API description above.",
+          "type" : "boolean"
+        }
+      }
+    }
+  }
+}

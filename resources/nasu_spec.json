@@ -1,0 +1,3347 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "v1",
+		"title": "Asset Management NASU",
+		"description": "Asset Management NASU"
+	},
+	"host": "sandbox-devapis.dstsystems.com",
+	"basePath": "/nasu/v1",
+	"schemes": [
+		"https"
+	],
+	"consumes": [],
+	"produces": [],
+	"tags": [],
+	"paths": {
+		"/accountTypes/{accountTypeId}/entitlements": {
+			"get": {
+				"summary": "Retrieve entitlements (options and permissions) for the provided account type.",
+				"operationId": "AccountTypesController.getEntitlements",
+				"parameters": [
+					{
+						"name": "authorizationContext",
+						"in": "header",
+						"description": "authorizationContext is required for TA-SHD-* roles only.<br/> authorizationContext is optional for OPR role (if not present, will use id from basic auth).",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "fundSponsorId",
+						"in": "header",
+						"description": "Unique ID for a fund sponsor.<br/> <br/> Max Length: 5<br/> Min Length: 1",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "accountTypeId",
+						"in": "path",
+						"description": "Unique ID for a fund sponsor legal ownership account type.<br/> <br/> Format: FS-REG-TYP-ID1|FS-REG-TYP-ID2",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "apikey",
+						"in": "header",
+						"required": true,
+						"type": "string",
+						"default": "OVUaOqFdpAUg5n0dOzCcfLXrfMQEmP8W"
+					},
+					{
+						"name": "Accept",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "Content-Type",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "securityChannel",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "system",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "tenant",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/AccountTypesEntitlementsResponseDTO"
+						}
+					},
+					"400": {
+						"description": "Client Errors",
+						"schema": {
+							"$ref": "#/definitions/ErrorBean"
+						}
+					}
+				},
+				"x-serviceName": "Get Account Entitlements",
+				"description": "<b>Function:</b><br/> Retrieve entitlements (options and permissions) for the provided account type.",
+				"x-dataAccessComponents": [
+					"VW01586C - M016P0"
+				],
+				"x-securityModelComponents": [],
+				"x-errors": [
+					{
+						"x-severity": "Error",
+						"x-code": "INTEGER_DIGITS",
+						"x-message": "expected a number with up to 5 digits",
+						"x-fieldName": "fundSponsorId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MIN_VALUE",
+						"x-message": "must be greater than or equal to 1",
+						"x-fieldName": "fundSponsorId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AT0001",
+						"x-message": "Error retrieving entitlements for the provided account type -.",
+						"x-fieldName": "accountTypeId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AT0002",
+						"x-message": "accountTypeId is invalid",
+						"x-fieldName": "accountTypeId"
+					}
+				],
+				"x-dstWsdl": "",
+				"x-dstRestriction": "",
+				"x-apim-category": "Configuration Options",
+				"x-apim-subcategory": "Rules",
+				"x-target-method": "get",
+				"x-target-url": "/fund-sponsors/{fundSponsorId}/accountTypes/{accountTypeId}/entitlements"
+			}
+		},
+		"/accountTypes/{accountTypeId}/roles": {
+			"get": {
+				"summary": "Retrieve the customer role information for the provided account type.",
+				"operationId": "AccountTypesController.getRoles",
+				"parameters": [
+					{
+						"name": "authorizationContext",
+						"in": "header",
+						"description": "authorizationContext is required for TA-SHD-* roles only.<br/> authorizationContext is optional for OPR role (if not present, will use id from basic auth).",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "fundSponsorId",
+						"in": "header",
+						"description": "Unique ID for a fund sponsor.<br/> <br/> Max Length: 5<br/> Min Length: 1",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "accountTypeId",
+						"in": "path",
+						"description": "Unique ID for a fund sponsor legal ownership account type.<br/> <br/> Format: FS-REG-TYP-ID1|FS-REG-TYP-ID2",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "apikey",
+						"in": "header",
+						"required": true,
+						"type": "string",
+						"default": "OVUaOqFdpAUg5n0dOzCcfLXrfMQEmP8W"
+					},
+					{
+						"name": "Accept",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "Content-Type",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "securityChannel",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "system",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "tenant",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/AccountTypesRolesResponseDTO"
+						}
+					},
+					"400": {
+						"description": "Client Errors",
+						"schema": {
+							"$ref": "#/definitions/ErrorBean"
+						}
+					}
+				},
+				"x-serviceName": "Get Account Relationship Role",
+				"description": "<b>Function:</b><br/> Retrieve the customer role information for the provided account type.",
+				"x-dataAccessComponents": [
+					"SP00483"
+				],
+				"x-securityModelComponents": [],
+				"x-errors": [
+					{
+						"x-severity": "Error",
+						"x-code": "INTEGER_DIGITS",
+						"x-message": "expected a number with up to 5 digits",
+						"x-fieldName": "fundSponsorId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MIN_VALUE",
+						"x-message": "must be greater than or equal to 1",
+						"x-fieldName": "fundSponsorId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AT0002",
+						"x-message": "accountTypeId is invalid",
+						"x-fieldName": "accountTypeId"
+					}
+				],
+				"x-dstWsdl": "",
+				"x-dstRestriction": "",
+				"x-apim-category": "Configuration Options",
+				"x-apim-subcategory": "Rules",
+				"x-target-method": "get",
+				"x-target-url": "/fund-sponsors/{fundSponsorId}/accountTypes/{accountTypeId}/roles"
+			}
+		},
+		"/accounts": {
+			"post": {
+				"summary": "Add a new account (NASU).",
+				"operationId": "AccountsController.createAccounts",
+				"parameters": [
+					{
+						"name": "authorizationContext",
+						"in": "header",
+						"description": "authorizationContext is required for TA-SHD-* roles only.<br/> authorizationContext is optional for OPR role (if not present, will use id from basic auth).",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "fundSponsorId",
+						"in": "header",
+						"description": "Unique ID for a fund sponsor.<br/> <br/> Max Length: 5<br /> Min Length: 1",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "AccountsNasuRequestDTO",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/AccountsNasuRequestDTO"
+						}
+					},
+					{
+						"name": "apikey",
+						"in": "header",
+						"required": true,
+						"type": "string",
+						"default": "OVUaOqFdpAUg5n0dOzCcfLXrfMQEmP8W"
+					},
+					{
+						"name": "Accept",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "Content-Type",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "securityChannel",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "system",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "tenant",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/AccountsNasuResponseDTO"
+						}
+					},
+					"400": {
+						"description": "Client Errors",
+						"schema": {
+							"$ref": "#/definitions/ErrorBean"
+						}
+					}
+				},
+				"x-serviceName": "Add New TA2000 Account (NASU)",
+				"description": "<b>Function:</b><br/>Add a new account (NASU).<br/><br/><b>Notes:</b><br/><ul><li>It is recommended that fan-address-validation API be called for address validation prior to calling this API.</li><li>The initial implementation of this API will only support a domestic account.</li></ul>",
+				"x-dataAccessComponents": [
+					"VIEW1580 - M002P0",
+					"VIEW2188 - P070P0",
+					"VIEW1579 - M001P0",
+					"VIEW5047 - W394P0",
+					"SP00317"
+				],
+				"x-securityModelComponents": [],
+				"x-errors": [
+					{
+						"x-severity": "Error",
+						"x-code": "AS0001",
+						"x-message": "Error retrieving account list information"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0002",
+						"x-message": "Error retrieving security issue id"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0003",
+						"x-message": "Registration format error"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0004",
+						"x-message": "firstName is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0005",
+						"x-message": "taxResponsiblePostalCode is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0006",
+						"x-message": "birthdate is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0010",
+						"x-message": "lastName is required for beneficiary"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0011",
+						"x-message": "Number of customer details for 529 account should be 2"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0012",
+						"x-message": "Number of customers cannot be more than 8 for non 529 account"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0013",
+						"x-message": "Number of positions cannot be more than 7 for 529 account"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0014",
+						"x-message": "Number of positions cannot be more than 300 for non 529 account"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0015",
+						"x-message": "Invalid {0 date format"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0016",
+						"x-message": "Invalid customer {0 format"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0017",
+						"x-message": "Invalid birthdate format"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0018",
+						"x-message": "Invalid {0"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0020",
+						"x-message": "Customer zipSuffix must be 4 digits"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0022",
+						"x-message": "addressType is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0023",
+						"x-message": "addressFormatType is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0024",
+						"x-message": "addressLine1 is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0025",
+						"x-message": "postalcode is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0026",
+						"x-message": "phoneNumberText is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0027",
+						"x-message": "Last name is required for new customer"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0028",
+						"x-message": "financialInstitutionId is required when brokerIdentificationNumber is provided"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0029",
+						"x-message": "Invalid designated date format"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0030",
+						"x-message": "Beneficiary zipCode must be 5 digits"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0031",
+						"x-message": "Beneficiary zipSuffix must be 4 digits"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0032",
+						"x-message": "Customer should have 1 Primary address"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0033",
+						"x-message": "At least one address is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0034",
+						"x-message": "Customer does not exist"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0035",
+						"x-message": "Error Creating NASU {0 - {1"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0036",
+						"x-message": "The beneficiaryAssetDistributionRate for primary beneficiaries must equal 100%"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0037",
+						"x-message": "The beneficiaryAssetDistributionRate for secondary beneficiaries must equal 100%"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0038",
+						"x-message": "defaultCertificationCode is required when isUsingDefaultCertificationText is true"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0039",
+						"x-message": "isTaxResponsible should be true for one customer"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0040",
+						"x-message": "When isTuitionSavingsPlan is true, customerType should be INDIVIDUAL"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0041",
+						"x-message": "At least 2 customers are required when accountType is JOINT"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0042",
+						"x-message": "Only 1 customer is allowed when accountType is SINGLE"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0043",
+						"x-message": "Number of customers should be 2 when accountType is UGMA_UTMA"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0044",
+						"x-message": "Customer can have only 1 Residential address"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0045",
+						"x-message": "Customer date of birth cannot be a future date"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0046",
+						"x-message": "Invalid customer postalCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0047",
+						"x-message": "Invalid accountTypeId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0048",
+						"x-message": "Beneficiary date of birth cannot be a future date"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0049",
+						"x-message": "Birthdate should be empty for customer type CORPORATION"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0050",
+						"x-message": "Invalid customer type CORPORATION for account type FIDUCIARY or FREE_FORMAT_FIDUCIARY"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0051",
+						"x-message": "taxId/taxIdtype of taxable account should match with taxId/taxIdtype of authorizationContext"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0052",
+						"x-message": "Invalid citizenPostalCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0053",
+						"x-message": "citizenPostalCode must be 2 characters"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0054",
+						"x-message": "taxResponsiblePostalCode must be 2 characters"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0055",
+						"x-message": "Invalid taxResponsiblePostalCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0056",
+						"x-message": "Customer postalCode must be 2 characters"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0057",
+						"x-message": "Beneficiary postalCode must be 2 characters"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0058",
+						"x-message": "Invalid beneficiary postalCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0059",
+						"x-message": "Invalid customer zipCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0060",
+						"x-message": "Invalid beneficiary zipCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0061",
+						"x-message": "Invalid customer taxId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0062",
+						"x-message": "Invalid beneficiary taxId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0063",
+						"x-message": "Invalid socialCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0064",
+						"x-message": "Invalid defaultCertificationCode. Allowed values are 0 to 9"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0065",
+						"x-message": "Invalid customer zipSuffix"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0066",
+						"x-message": "Invalid beneficiary zipSuffix"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0067",
+						"x-message": "Customer zipCode must be 5 digits"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0068",
+						"x-message": "Beneficiary firstName is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0070",
+						"x-message": "beneficiaryAssetDistributionRate is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0071",
+						"x-message": "Beneficiary taxId details are required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0072",
+						"x-message": "Invalid beneficiary taxIdType"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0073",
+						"x-message": "isLead must be true"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AS0074",
+						"x-message": "isLead is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "accountType"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 999",
+						"x-fieldName": "socialCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "isTuitionSavingsPlan"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 2 and 2",
+						"x-fieldName": "citizenPostalCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "citizenPostalCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "isUsingDefaultCertificationText"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "isTransferOnDeathBeneficiaryEligible"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 99999999999",
+						"x-fieldName": "accountNumber"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "accountControlLevelText"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 9999999",
+						"x-fieldName": "financialInstitutionId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 9",
+						"x-fieldName": "financialInstitutionBranchId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 9",
+						"x-fieldName": "representativeId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 30",
+						"x-fieldName": "representativeName"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 20",
+						"x-fieldName": "brokerIdentificationNumber"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 9",
+						"x-fieldName": "defaultCertificationCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 9999999",
+						"x-fieldName": "fundId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField1"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField2"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField3"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField4"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField5"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField6"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField7"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField8"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 999999999",
+						"x-fieldName": "taxId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "taxIdType"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "isNewCustomer"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "firstName"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "lastName"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 31",
+						"x-fieldName": "middleName"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 8",
+						"x-fieldName": "nameSuffix"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 8",
+						"x-fieldName": "namePrefix"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "customerRole"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "taxResponsibleCustomerPostalCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 2",
+						"x-fieldName": "taxResponsiblePostalCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 2",
+						"x-fieldName": "postalCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 255",
+						"x-fieldName": "emailAddress"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "transferOnDeathDistributionType"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "taxIdentification"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "beneficiaryType"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "beneficiaryCustodianName"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "entityName3"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "entityName4"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "relationText"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "DIGITS",
+						"x-message": "numeric value out of bounds (<5 digits>.<2 digits> expected)",
+						"x-fieldName": "beneficiaryAssetDistributionRate"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "addressLine1"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "addressLine2"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "city"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 11",
+						"x-fieldName": "foreignZipCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 99999",
+						"x-fieldName": "zipCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 9999",
+						"x-fieldName": "zipSuffix"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "taxIdentification"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 10",
+						"x-fieldName": "phoneNumberText"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 11",
+						"x-fieldName": "internalConnectionNumber"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "COLLECTION_SIZE",
+						"x-message": "size must be between 1 and 2",
+						"x-fieldName": "phoneInformation"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "addresses"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "militaryLocation"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "COLLECTION_SIZE",
+						"x-message": "size must be between 0 and 8",
+						"x-fieldName": "beneficiaries"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "COLLECTION_SIZE",
+						"x-message": "size must be between 1 and 99",
+						"x-fieldName": "customers"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "COLLECTION_SIZE",
+						"x-message": "size must be between 1 and 300",
+						"x-fieldName": "positions"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "accountType"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 999",
+						"x-fieldName": "socialCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "isTuitionSavingsPlan"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "isUsingDefaultCertificationText"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "isTransferOnDeathBeneficiaryEligible"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 99999999999",
+						"x-fieldName": "accountNumber"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "accountControlLevelText"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 9999999",
+						"x-fieldName": "financialInstitutionId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 9",
+						"x-fieldName": "financialInstitutionBranchId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 9",
+						"x-fieldName": "representativeId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 30",
+						"x-fieldName": "representativeName"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 20",
+						"x-fieldName": "brokerIdentificationNumber"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 9",
+						"x-fieldName": "defaultCertificationCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 9999999",
+						"x-fieldName": "fundId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField1"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField2"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField3"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField4"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField5"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField6"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField7"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 1",
+						"x-fieldName": "clientDefinedField8"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 999999999",
+						"x-fieldName": "taxId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "taxIdType"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "isNewCustomer"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "firstName"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "lastName"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 31",
+						"x-fieldName": "middleName"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 8",
+						"x-fieldName": "nameSuffix"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 8",
+						"x-fieldName": "namePrefix"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "customerRole"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "taxResponsibleCustomerPostalCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "DIGITS",
+						"x-message": "numeric value out of bounds (<5 digits>.<10 digits> expected)",
+						"x-fieldName": "foreignTaxRate"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 255",
+						"x-fieldName": "emailAddress"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "transferOnDeathDistributionType"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "taxIdentification"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "beneficiaryType"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "beneficiaryCustodianName"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "entityName3"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "entityName4"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "relationText"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "addressLine1"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "addressLine2"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 35",
+						"x-fieldName": "city"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 11",
+						"x-fieldName": "foreignZipCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 99999",
+						"x-fieldName": "zipCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 9999",
+						"x-fieldName": "zipSuffix"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "taxIdentification"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 10",
+						"x-fieldName": "phoneNumberText"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "LENGTH",
+						"x-message": "length must be between 0 and 11",
+						"x-fieldName": "internalConnectionNumber"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "COLLECTION_SIZE",
+						"x-message": "size must be between 1 and 2",
+						"x-fieldName": "phoneInformation"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "addresses"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_IN_ENUM",
+						"x-message": "not in the list of valid values",
+						"x-fieldName": "militaryLocation"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "COLLECTION_SIZE",
+						"x-message": "size must be between 0 and 8",
+						"x-fieldName": "beneficiaries"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "COLLECTION_SIZE",
+						"x-message": "size must be between 1 and 2147483647",
+						"x-fieldName": "customers"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "COLLECTION_SIZE",
+						"x-message": "size must be between 1 and 2147483647",
+						"x-fieldName": "positions"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "REQUIRED",
+						"x-message": "is required",
+						"x-fieldName": "city"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MIN_VALUE",
+						"x-message": "must be greater than or equal to 10000",
+						"x-fieldName": "zipCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 99999",
+						"x-fieldName": "zipCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "zipCode"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MIN_VALUE",
+						"x-message": "must be greater than or equal to 0",
+						"x-fieldName": "zipSuffix"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MAX_VALUE",
+						"x-message": "must be less than or equal to 9999",
+						"x-fieldName": "zipSuffix"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "NOT_NULL",
+						"x-message": "may not be null",
+						"x-fieldName": "zipSuffix"
+					}
+				],
+				"x-dstWsdl": "",
+				"x-dstRestriction": "",
+				"x-apim-category": "Investment Position",
+				"x-apim-subcategory": "Account",
+				"x-target-method": "post",
+				"x-target-url": "/fund-sponsors/{fundSponsorId}/accounts"
+			}
+		},
+		"/funds/eligible": {
+			"post": {
+				"summary": "Retrieve a list of funds for the provided fund sponsor that are eligible for investment.",
+				"operationId": "FundsController.getFundsNewPositionsSummary",
+				"parameters": [
+					{
+						"name": "authorizationContext",
+						"in": "header",
+						"description": "authorizationContext is required for TA-SHD-* roles only.<br/> authorizationContext is optional for OPR role (if not present, will use id from basic auth).",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "fundSponsorId",
+						"in": "header",
+						"description": "Unique ID for a fund sponsor.<br/> <br/> Max Length: 5<br/> Min Length: 1",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "FundsNewPositionsSummaryRequestDTO",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/FundsNewPositionsSummaryRequestDTO"
+						}
+					},
+					{
+						"name": "apikey",
+						"in": "header",
+						"required": true,
+						"type": "string",
+						"default": "OVUaOqFdpAUg5n0dOzCcfLXrfMQEmP8W"
+					},
+					{
+						"name": "Accept",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "Content-Type",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "securityChannel",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "system",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "tenant",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/FundsNewPositionsSummaryResponseDTO"
+						}
+					},
+					"400": {
+						"description": "Client Errors",
+						"schema": {
+							"$ref": "#/definitions/ErrorBean"
+						}
+					}
+				},
+				"x-serviceName": "Get Eligible Funds List for Sponsor",
+				"description": "<b>Function:</b><br/> Retrieve a list of funds for the provided fund sponsor that are eligible for investment. <br/> <br/> <b> Investment types:</b> <ul> <li>EXCHANGE</li> <li>PURCHASE</li> <li>ESTABLISH</li> <li>ESTABLISH_529</li> </ul></b>",
+				"x-dataAccessComponents": [
+					"VIEW5047 - W394P0",
+					"VIEW1768 - H928P0",
+					"VIEW0185 - M743P0"
+				],
+				"x-securityModelComponents": [],
+				"x-errors": [
+					{
+						"x-severity": "Error",
+						"x-code": "FN002",
+						"x-message": "socialCode length should be 3 digits"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN003",
+						"x-message": "lastName length should be less than or equal to 35 characters"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN004",
+						"x-message": "tuitionSavingsPlanEnrollmentDate expected date format MM/DD/YYYY"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN004",
+						"x-message": "studentDateOfBirth expected date format MM/DD/YYYY"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN005",
+						"x-message": "postalCode length should be 2 characters"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN006",
+						"x-message": "accountTypeId is invalid"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN007",
+						"x-message": "positionId is invalid"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN008",
+						"x-message": "studentTaxId should not exceed 9 digits"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN001",
+						"x-message": "transactionType is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN001",
+						"x-message": "positionId is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN001",
+						"x-message": "socialCode is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN001",
+						"x-message": "postalCode is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN001",
+						"x-message": "isFiduciaryAccount is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN001",
+						"x-message": "studentTaxId is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN001",
+						"x-message": "studentDateOfBirth is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN001",
+						"x-message": "tuitionSavingsPlanEnrollmentDate is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN001",
+						"x-message": "lastName is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN001",
+						"x-message": "establish529 is required"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN009",
+						"x-message": "Error retrieving Establish funds view information"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN010",
+						"x-message": "Error retrieving Establish_529 funds view information"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FN011",
+						"x-message": "Fund from positionId field could not be found"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FP0001",
+						"x-message": "Error retrieving fund profile view information"
+					}
+				],
+				"x-dstWsdl": "",
+				"x-dstRestriction": "",
+				"x-apim-category": "Configuration Options",
+				"x-apim-subcategory": "Fund",
+				"x-target-method": "post",
+				"x-target-url": "/fund-sponsors/{fundSponsorId}/funds/eligible/summary"
+			}
+		},
+		"/accountTypes": {
+			"get": {
+				"summary": "Retrieve a list of account types allowed for the provided fund sponsor.",
+				"operationId": "AccountTypesController.getSummary",
+				"parameters": [
+					{
+						"name": "authorizationContext",
+						"in": "header",
+						"description": "authorizationContext is required for TA-SHD-* roles only.<br/> authorizationContext is optional for OPR role (if not present, will use id from basic auth).",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "fundSponsorId",
+						"in": "header",
+						"description": "Unique ID for a fund sponsor.<br/> <br/> Max Length: 5<br/> Min Length: 1",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "apikey",
+						"in": "header",
+						"required": true,
+						"type": "string",
+						"default": "OVUaOqFdpAUg5n0dOzCcfLXrfMQEmP8W"
+					},
+					{
+						"name": "Accept",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "Content-Type",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "securityChannel",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "system",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "tenant",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/AccountTypesSummaryResponseDTO"
+						}
+					},
+					"400": {
+						"description": "Client Errors",
+						"schema": {
+							"$ref": "#/definitions/ErrorBean"
+						}
+					}
+				},
+				"x-serviceName": "Get Valid Account Types",
+				"description": "<b>Function:</b><br/> Retrieve a list of account types allowed for the provided fund sponsor.",
+				"x-dataAccessComponents": [
+					"VW01586C - M016P0"
+				],
+				"x-securityModelComponents": [],
+				"x-errors": [
+					{
+						"x-severity": "Error",
+						"x-code": "INTEGER_DIGITS",
+						"x-message": "expected a number with up to 5 digits",
+						"x-fieldName": "fundSponsorId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MIN_VALUE",
+						"x-message": "must be greater than or equal to 1",
+						"x-fieldName": "fundSponsorId"
+					}
+				],
+				"x-dstWsdl": "",
+				"x-dstRestriction": "",
+				"x-apim-category": "Configuration Options",
+				"x-apim-subcategory": "Rules",
+				"x-target-method": "get",
+				"x-target-url": "/fund-sponsors/{fundSponsorId}/accountTypes/summary"
+			}
+		},
+		"/accountTypes/{accountTypeId}": {
+			"get": {
+				"summary": "Retrieve attributes for the provided account type.",
+				"operationId": "AccountTypesController.getAccountTypes",
+				"parameters": [
+					{
+						"name": "authorizationContext",
+						"in": "header",
+						"description": "authorizationContext is required for TA-SHD-* roles only.<br/> authorizationContext is optional for OPR role (if not present, will use id from basic auth).",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "fundSponsorId",
+						"in": "header",
+						"description": "Unique ID for a fund sponsor.<br/> <br/> Max Length: 5<br/> Min Length: 1",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "accountTypeId",
+						"in": "path",
+						"description": "Unique ID for a fund sponsor legal ownership account type.<br/> <br/> Format: FS-REG-TYP-ID1|FS-REG-TYP-ID2",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "apikey",
+						"in": "header",
+						"required": true,
+						"type": "string",
+						"default": "OVUaOqFdpAUg5n0dOzCcfLXrfMQEmP8W"
+					},
+					{
+						"name": "Accept",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "Content-Type",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "securityChannel",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "system",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "tenant",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/AccountTypesResponseDTO"
+						}
+					},
+					"400": {
+						"description": "Client Errors",
+						"schema": {
+							"$ref": "#/definitions/ErrorBean"
+						}
+					}
+				},
+				"x-serviceName": "Get Account Type Attributes",
+				"description": "<b>Function:</b><br/> Retrieve attributes for the provided account type.",
+				"x-dataAccessComponents": [
+					"VW01586C - M016P0"
+				],
+				"x-securityModelComponents": [],
+				"x-errors": [
+					{
+						"x-severity": "Error",
+						"x-code": "INTEGER_DIGITS",
+						"x-message": "expected a number with up to 5 digits",
+						"x-fieldName": "fundSponsorId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "MIN_VALUE",
+						"x-message": "must be greater than or equal to 1",
+						"x-fieldName": "fundSponsorId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AT0001",
+						"x-message": "Error retrieving Account Types for the provided account type -.",
+						"x-fieldName": "accountTypeId"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "AT0002",
+						"x-message": "accountTypeId is invalid",
+						"x-fieldName": "accountTypeId"
+					}
+				],
+				"x-dstWsdl": "",
+				"x-dstRestriction": "",
+				"x-apim-category": "Configuration Options",
+				"x-apim-subcategory": "Rules",
+				"x-target-method": "get",
+				"x-target-url": "/fund-sponsors/{fundSponsorId}/accountTypes/{accountTypeId}"
+			}
+		},
+		"/funds/summary": {
+			"get": {
+				"summary": "Retrieve a list of funds for a fund sponsor with optional filtering criteria.",
+				"operationId": "FundsController.getFunds",
+				"parameters": [
+					{
+						"name": "authorizationContext",
+						"in": "header",
+						"description": "authorizationContext is required for TA-SHD-* roles only.<br/> authorizationContext is optional for OPR role (if not present, will use id from basic auth).",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "fundSponsorId",
+						"in": "header",
+						"description": "Unique ID  for a fund sponsor.<br/><br/> Max Length: 5<br/> Min Length: 1",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "mutualFundName",
+						"in": "query",
+						"description": "Mutual Fund name.<br/><br/> Max Length: 45",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "shareClassLongText",
+						"in": "query",
+						"description": "Long name for a Mutual Fund share class.<br/><br/> Max Length: 35",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "iciInvestmentObjectiveText",
+						"in": "query",
+						"description": "Description of Mutual Fund investment objective.<br/><br/> Max Length: 35",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "apikey",
+						"in": "header",
+						"required": true,
+						"type": "string",
+						"default": "OVUaOqFdpAUg5n0dOzCcfLXrfMQEmP8W"
+					},
+					{
+						"name": "Accept",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "Content-Type",
+						"in": "header",
+						"description": "Specify as <code>application/json</code>.",
+						"required": false,
+						"type": "string",
+						"default": "application/json"
+					},
+					{
+						"name": "securityChannel",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "system",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "tenant",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/FundsResponseDTO"
+						}
+					},
+					"400": {
+						"description": "Client Errors",
+						"schema": {
+							"$ref": "#/definitions/ErrorBean"
+						}
+					}
+				},
+				"x-serviceName": "Get Funds List for Sponsor",
+				"description": "<b>Function:</b><br/> Retrieve a list of funds for a fund sponsor with optional filtering criteria. <br/> <br/> <b> Filtering Options:</b> <ul> <li>mutualFundName</li> <li>shareClassLongText</li> <li>iciInvestmentObjectiveText</li> </ul>",
+				"x-dataAccessComponents": [
+					"VIEW5047 - W394P0",
+					"VIEW0185 - M743P0",
+					"VIEW1768 - H928P0"
+				],
+				"x-securityModelComponents": [],
+				"x-errors": [
+					{
+						"x-severity": "Error",
+						"x-code": "FS0002",
+						"x-message": "Fund name is invalid"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FS0003",
+						"x-message": "Share class is invalid"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FS0004",
+						"x-message": "Investment objective is invalid"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FS0005",
+						"x-message": "Position Id is invalid"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FS0006",
+						"x-message": "Error parsing position Id"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FS0007",
+						"x-message": "Transaction type is invalid"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FS0008",
+						"x-message": "Transaction type is missing"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FS0009",
+						"x-message": "Position Id is missing"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FS0010",
+						"x-message": "Fund from position Id could not be found"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FS0011",
+						"x-message": "Invalid fundId array length. Array length should be between 1-50"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FS0012",
+						"x-message": "Invalid search criteria. Valid values are mutualFundName, shareClassLongText, iciInvestmentObjectiveText"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FP0001",
+						"x-message": "Error retrieving fund profile view information"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FP0002",
+						"x-message": "Error retrieving valid purchase funds view information"
+					},
+					{
+						"x-severity": "Error",
+						"x-code": "FP0003",
+						"x-message": "Error retrieving valid exchange funds view information"
+					}
+				],
+				"x-dstWsdl": "",
+				"x-dstRestriction": "",
+				"x-apim-category": "Entity",
+				"x-apim-subcategory": "Fund Sponsor",
+				"x-target-method": "get",
+				"x-target-url": "/fund-sponsors/{fundSponsorId}/funds/summary"
+			}
+		}
+	},
+	"definitions": {
+		"AccountTypeSummary": {
+			"properties": {
+				"accountType": {
+					"description": "Indicates the new account registration classification.<br/> <br/> Valid Values: <ul> <li>FREE_FORMAT</li> <li>SINGLE</li> <li>JOINT</li> <li>UGMA_UTMA</li> <li>FIDUCIARY</li> <li>FREE_FORMAT_FIDUCIARY</li> </ul>",
+					"type": "string",
+					"enum": [
+						"FREE_FORMAT",
+						"SINGLE",
+						"JOINT",
+						"UGMA_UTMA",
+						"FIDUCIARY",
+						"FREE_FORMAT_FIDUCIARY"
+					]
+				},
+				"accountTypeId": {
+					"description": "Unique ID for a fund sponsor legal ownership account type.<br/> <br/> Format: FS-REG-TYP-ID1|FS-REG-TYP-ID2",
+					"type": "string"
+				},
+				"accountTypeName": {
+					"description": "A name that identifies the fund sponsor legal ownership account type.",
+					"type": "string"
+				},
+				"isTuitionSavingsPlan": {
+					"description": "If true, the Mutual Fund is allowed for Tuitions Savings Plan (529).",
+					"type": "boolean"
+				},
+				"socialCode": {
+					"description": "Identifies the type of account that is being returned.<br/> <br/> Max 3 digits<br/> <br/> Example: IRA Account",
+					"format": "int32",
+					"type": "integer"
+				}
+			}
+		},
+		"FundsNewPositionsSummaryResponseDTO": {
+			"properties": {
+				"errorList": {
+					"description": "",
+					"items": {
+						"$ref": "#/definitions/ErrorBean"
+					},
+					"type": "array"
+				},
+				"fundProfile": {
+					"description": "List of fund summary details.",
+					"items": {
+						"$ref": "#/definitions/FundNewSummary"
+					},
+					"type": "array"
+				}
+			}
+		},
+		"AddressDetails": {
+			"required": [
+				"addressType",
+				"addressFormatType",
+				"city",
+				"zipCode",
+				"zipSuffix"
+			],
+			"properties": {
+				"address": {
+					"description": "Address information.",
+					"$ref": "#/definitions/NasuAddress"
+				},
+				"addressFormatType": {
+					"description": "Indicates format type of an address.<br/> <br/> Valid Values: <ul> <li>FORMATTED</li> <li>UNFORMATTED</li> </ul> Notes: Domestic addresses are formatted and foreign addresses are unformatted.",
+					"type": "string"
+				},
+				"addressType": {
+					"description": "Indicates the type of address to be added for all positions associated with the account(legal owner).<br/> <br/> Valid Values: <ul> <li>PRIMARY</li> <li>RESIDENTIAL</li> </ul> Notes: <ul> <li>If only primary address is provided, the value cannot be a post office box.</li> <li>Alternate and Seasonal are not yet functional and may be added in the future.</li> <li>Only one PRIMARY and one RESIDENTIAL are allowed.</li> </ul>",
+					"type": "string"
+				},
+				"city": {
+					"description": "City name.",
+					"type": "string"
+				},
+				"isOverridingAddressStandardization": {
+					"description": "If true, the address standardization is overridden.<br/><br/>Format: Optional, default = FALSE",
+					"type": "boolean"
+				},
+				"militaryLocation": {
+					"description": "The value used by the US Postal Service to direct mail to military bases, US Naval Ships, and other US Government locations that are overseas.<br/> <br/> Valid Values: <ul> <li>ASIA</li> <li>EUROPE</li> <li>PACIFIC</li> <li>NOT_APPLICABLE</li> </ul><br/><br/>Format: Optional, default = NOT_APPLICABLE",
+					"type": "string"
+				},
+				"postalCode": {
+					"description": "State abbreviation.<br/><br/>Max Length: 2",
+					"type": "string"
+				},
+				"zipCode": {
+					"description": "Zip Code.<br/><br/>Max Length: 4",
+					"type": "string"
+				},
+				"zipSuffix": {
+					"description": "Zip Code suffix.",
+					"type": "string"
+				}
+			}
+		},
+		"AccountsNasuBeneficiaryAddress": {
+			"properties": {
+				"addressLine1": {
+					"description": "First address line.<br/> <br/> Max Length: 35 <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, addressLine1 will be ignored if provided.",
+					"type": "string"
+				},
+				"addressLine2": {
+					"description": "Second address line.<br/> <br/> Max Length: 35 <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, addressLine2 will be ignored if provided.",
+					"type": "string"
+				},
+				"city": {
+					"description": "City name.<br/> <br/> Max Length: 35 <br/> </br> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, city will be ignored if provided.",
+					"type": "string"
+				},
+				"foreignZipCode": {
+					"description": "Foreign zip code.<br/> <br/> Max Length: 11 <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, foreignZipCode will be ignored if provided.",
+					"type": "string"
+				},
+				"postalCode": {
+					"description": "State/country abbreviation.<br/> <br/>Max Length: 2<br/><br/> Format: Optional, default = zero <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, postalCode will be ignored if provided.",
+					"type": "string"
+				},
+				"zipCode": {
+					"description": "Zip code.<br/> <br/> Max Length: 5 <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, zipCode will be defaulted to 0. Value will be ignored if provided.",
+					"type": "string"
+				},
+				"zipSuffix": {
+					"description": "ZIP Code suffix.<br/> <br/> Max Length: 4<br/> <br/> Format: 9999 <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, zipSuffix will be defaulted to 0. Value will be ignored if provided.",
+					"type": "string"
+				}
+			}
+		},
+		"NasuAddress": {
+			"required": [
+				"addressLine1"
+			],
+			"properties": {
+				"addressLine1": {
+					"description": "First address line.<br/> <br/> Max Length: 35",
+					"type": "string"
+				},
+				"addressLine2": {
+					"description": "Second address line.<br/> <br/> Max Length: 35",
+					"type": "string"
+				},
+				"addressLine3": {
+					"description": "Third address line.<br/> <br/> Max Length: 35",
+					"type": "string"
+				},
+				"addressLine4": {
+					"description": "Fourth address line.<br/> <br/> Max Length: 35",
+					"type": "string"
+				},
+				"addressLine5": {
+					"description": "Fifth address line.<br/> <br/> Max Length: 35<br/> <br/> Required when <b>formatType</b> is Unformatted.",
+					"type": "string"
+				}
+			}
+		},
+		"AccountsNasuCustomerBean": {
+			"required": [
+				"isNewCustomer",
+				"lastName",
+				"customerRole",
+				"isTaxResponsible"
+			],
+			"properties": {
+				"addresses": {
+					"description": "List of addresses for the specified entity. <br/> <br/> Notes: An entry for <b>addressType</b> = Primary is required. An entry for <b>addressType</b> = Residential is optional.",
+					"items": {
+						"$ref": "#/definitions/AddressDetails"
+					},
+					"type": "array"
+				},
+				"birthDate": {
+					"description": "Birthdate.<br/> <br/> Format: YYYY-MM-DD<br/><br/>Required if customerType = INDIVIDUAL",
+					"type": "string"
+				},
+				"citizenStatus": {
+					"description": "Indicates the status of US citizenship.<br/> <br/> Valid Values: <ul> <li>US_CITIZEN</li> <li>NON_RESIDENT_ALIEN</li> <li>RESIDENT_ALIEN</li> <li>UNKNOWN</li> </ul><br/>Format: Optional, default = UNKNOWN",
+					"type": "string"
+				},
+				"clientDefinedField1": {
+					"description": "Client defined field1.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField2": {
+					"description": "Client defined field2.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField3": {
+					"description": "Client defined field3.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField4": {
+					"description": "Client defined field4.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField5": {
+					"description": "Client defined field5.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField6": {
+					"description": "Client defined field6.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField7": {
+					"description": "Client defined field7.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField8": {
+					"description": "Client defined field8.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"customerRole": {
+					"description": "Defines the role(s) the registered customer has to the account. <br/> <br/> Valid Values: <ul> <li>ACCOUNT_NUMBER_TEXT</li> <li>ACCOUNT_NUMBER_VARIABLE</li> <li>ADMINISTRATOR_TEXT</li> <li>AGE_VARIABLE</li> <li>AND_TEXT</li> <li>BENEFICIARY</li> <li>CONTINGENT_BENEFICIARY</li> <li>COMMUNITY_PROPERTY</li> <li>CONSERVATORSHIP_TEXT</li> <li>CONNECTOR</li> <li>CONTRIBUTION_YEAR</li> <li>CUSTODIAN</li> <li>CUSTODIAN_TEXT</li> <li>CONVERSION_YEAR</li> <li>DATE_VARIABLE</li> <li>DECEASED_DATE</li> <li>DECENDENT</li> <li>DATED_TEXT</li> <li>EDUCATION_IRA</li> <li>EXECUTOR_TEXT</li> <li>FBO_TEXT</li> <li>FIDUCIARY_TEXT</li> <li>OWNER_FIVE</li> <li>OWNER_FOUR</li> <li>GUARDIAN</li> <li>GUARDIAN_TEXT</li> <li>GRANTOR</li> <li>HOUSE_FIDUCIARY_TEXT</li> <li>HOUSE_FIDUCIARY</li> <li>IRA</li> <li>JTWROS</li> <li>MATURITY_DATE</li> <li>MINOR</li> <li>MINOR_TEXT</li> <li>MARITAL_PROPERTY</li> <li>OWNER_TEXT</li> <li>SUCCESSOR_OWNER</li> <li>ORGANIZATION</li> <li>OPTIONAL_TEXT_ONE</li> <li>OPTIONAL_TEXT_TEN</li> <li>OPTIONAL_TEXT_TWO</li> <li>OPTIONAL_TEXT_THREE</li> <li>OPTIONAL_TEXT_FOUR</li> <li>OPTIONAL_TEXT_FIVE</li> <li>OPTIONAL_TEXT_SIX</li> <li>OPTIONAL_TEXT_SEVEN</li> <li>OPTIONAL_TEXT_EIGHT</li> <li>OPTIONAL_TEXT_NINE</li> <li>PARTNERSHIP</li> <li>PLAN_NAME_TEXT</li> <li>PAY_ON_DEATH_TEXT</li> <li>PERSONAL_REPRESENTATIVE</li> <li>PRIMARY</li> <li>PERSONAL_REPRESENTATIVE_TEXT</li> <li>ROTH_IRA_CONVERSION_IRA</li> <li>RETIREMENT_PARTICIPANT</li> <li>ROLLOVER_IRA_TEXT</li> <li>ROTH_IRA</li> <li>SASP_TEXT</li> <li>SELF_DIRECTED_IRA_TEXT</li> <li>SECONDARY</li> <li>SEPARATE_PROPERTY_TEXT</li> <li>SOLE_PROPIETORSHIP</li> <li>STATE_VARIABLE</li> <li>SUCCESSOR_CUSTODIAN</li> <li>SUCCESSOR_CUSTODIAN_TEXT</li> <li>SUCCESSOR_TRUSTEE</li> <li>TBE</li> <li>OWNER_THREE</li> <li>TIC</li> <li>TRANSFER_ON_DEATH_TEXT</li> <li>TRADE_AUTHORITY</li> <li>TRUST</li> <li>STATE_TEXT</li> <li>OWNER</li> <li>TRUST_TYPE_VARIABLE</li> <li>TRUSTEE</li> <li>TRUSTEE_TEXT</li> <li>OWNER_TWO</li> <li>UA_TEXT</li> <li>UNDER_AGREEMENT_DATE</li> <li>UGMA</li> <li>UNDER_AGREEMENT_TEXT</li> <li>UNTIL_TEXT</li> <li>UTMA</li> <li>UW_TEXT</li> <li>CUSTOMER_TEXT</li> <li>SUCCESSOR_TEXT</li> <li>ULTIMATE_BENEFICIAL_OWNER</li> </ul>",
+					"type": "string"
+				},
+				"customerType": {
+					"description": "Indicates the type of a customer.<br/> <br/> Valid Values: <ul> <li>INDIVIDUAL</li> <li>CORPORATION</li> <li>UNKNOWN</li> </ul><br/>Format: Optional, default = UNKNOWN",
+					"type": "string"
+				},
+				"emailAddress": {
+					"description": "The address used to send information electronically to a specific mailbox.<br/><br/>Max Length: 255",
+					"type": "string"
+				},
+				"firstName": {
+					"description": "First name.<br/><br/>Max Length: 35",
+					"type": "string"
+				},
+				"foreignTaxRate": {
+					"description": "The foreign tax rate.<br/> <br/> Max 15 digits with max 10 decimal points.<br/> <br/> Format: Optional, default = 0<br/> <br/> Ex: 999.9999999999 or -999.9999999999",
+					"format": "double",
+					"type": "number"
+				},
+				"gender": {
+					"description": "The gender of the specified entity.<br/> <br/> <ul> <li>FEMALE</li> <li>MALE</li> <li>NOT_APPLICABLE</li> <li>UNKNOWN</li> </ul><br/>Format: Optional, default = UNKNOWN",
+					"type": "string"
+				},
+				"hasMarketingMailSent": {
+					"description": "If true, marketing mail is sent to the customer.",
+					"type": "boolean"
+				},
+				"isCorrespondenceCustomer": {
+					"description": "If true, the customer info is used when sending correspondence.",
+					"type": "boolean"
+				},
+				"isEmployee": {
+					"description": "If true, shareowner is an employee of management company.",
+					"type": "boolean"
+				},
+				"isMonitorVIP": {
+					"description": "If true, the information sent to the customer is monitored for accuracy.",
+					"type": "boolean"
+				},
+				"isNewCustomer": {
+					"description": "If true, customer entry is for a new customer.",
+					"type": "boolean"
+				},
+				"isTaxResponsible": {
+					"description": "If true, the customer is tax responsible for the account.",
+					"type": "boolean"
+				},
+				"lastName": {
+					"description": "Last name or name of an organization.<br/><br/>Max Length: 35",
+					"type": "string"
+				},
+				"maritalStatus": {
+					"description": "Indicates the marital status. <br/> <br/> <ul> <li>SINGLE</li> <li>MARRIED</li> <li>UNKNOWN</li> </ul><br/>Format: Optional, default = UNKNOWN",
+					"type": "string"
+				},
+				"middleName": {
+					"description": "The middle name for the specified entity.<br/><br/>Max Length: 31",
+					"type": "string"
+				},
+				"namePrefix": {
+					"description": "Name prefix.<br/><br/>Max Length: 8",
+					"type": "string"
+				},
+				"nameSuffix": {
+					"description": "Name suffix.<br/><br/>Max Length: 8",
+					"type": "string"
+				},
+				"phoneInformation": {
+					"description": "Phone number details associated with the specified entry.<br/><br/>Max Size: 2",
+					"items": {
+						"$ref": "#/definitions/AccountsNasuPhoneInformation"
+					},
+					"type": "array"
+				},
+				"taxIdentification": {
+					"description": "Tax ID details associated with the specified entry.",
+					"$ref": "#/definitions/AccountsNasuTaxIdentification"
+				},
+				"taxResponsibleCustomerPostalCode": {
+					"description": "State abbreviation for the tax responsible entity.<br/><br/>Max Length: 2",
+					"type": "string"
+				}
+			}
+		},
+		"AccountsNasuBeneficiary": {
+			"required": [
+				"transferOnDeathDistributionType",
+				"beneficiaryType",
+				"relationText"
+			],
+			"properties": {
+				"address": {
+					"description": "Address information.",
+					"$ref": "#/definitions/AccountsNasuBeneficiaryAddress"
+				},
+				"beneficiaryAssetDistributionRate": {
+					"description": "A rate that represents the amount/percent of assets that will be distributed to a beneficiary.<br/><br/> Required when <b>relationtext</b> is <ul> <li>CHILD</li> <li>PARENT</li> <li>SIBLING</li> <li>SPOUSE</li> <li>WIDOW</li> <li>ENTITY</li> <li>OTHER</li> </ul> <br/> Max 5 digits with max 2 decimal points. <br/> <br/> Format = Signed 99999.99 <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, beneficiaryAssetDistributionRate must be 100.00 if provided in the request.",
+					"format": "double",
+					"type": "number"
+				},
+				"beneficiaryCustodianName": {
+					"description": "A name that designates the custodian of a beneficiary if the beneficiary is a minor.<br/> <br/> Max Length: 35<br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, beneficiaryCustodianName will be ignored if provided.",
+					"type": "string"
+				},
+				"beneficiaryType": {
+					"description": "Indicates the beneficiary type.<br/> <br/> Valid Values: <ul> <li>PRIMARY</li> <li>SECONDARY</li> </ul>",
+					"type": "string"
+				},
+				"birthDate": {
+					"description": "Birthdate.<br/> <br/> Format: YYYY-MM-DD<br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, birthDate will be ignored if provided.",
+					"type": "string"
+				},
+				"designatedDate": {
+					"description": "The date on which the beneficiary was designated as a beneficiary.<br/> <br/> Format: YYYY-MM-DD<br/> <br/> Notes: If not provided, will be set to the current date.",
+					"type": "string"
+				},
+				"entityName3": {
+					"description": "The third line of organization/entity name.<br/> <br/> Max Length: 35 <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, entityName3 will be ignored if provided.",
+					"type": "string"
+				},
+				"entityName4": {
+					"description": "The fourth line of organization/entity name.<br/> <br/> Max Length: 35 <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, entityName4 will be ignored if provided.",
+					"type": "string"
+				},
+				"firstName": {
+					"description": "First name.<br/> <br/> Required when <b>relationtext</b> is <ul> <li>CHILD</li> <li>PARENT</li> <li>SIBLING</li> <li>SPOUSE</li> <li>WIDOW</li> <li>ENTITY</li> <li>OTHER</li> </ul> <br/> Max Length: 35 <br/> <br/> Notes:  If relationText PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, firstName will be defaulted to relationText. Value will be ignored if provided.<br/> <br/> Example: If relationText is provided as PER_CAPITA,firstName will be set as PER CAPITA.",
+					"type": "string"
+				},
+				"isLead": {
+					"description": "If true, the current beneficiary is the lead beneficiary for the shareowner.<br/> <br/> Format: Optional, default = FALSE <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, isLead must be true if provided in the request.",
+					"type": "boolean"
+				},
+				"lastName": {
+					"description": "Last name or name of an organization.<br/> <br/> Max Length: 35<br/> <br/> Required if beneificiaries; taxIdentificationType is <b>SSN</b> <br/> and <b>relationtext</b> is <br/> <ul> <li>CHILD</li> <li>PARENT</li> <li>SIBLING</li> <li>SPOUSE</li> <li>WIDOW</li> <li>ENTITY</li> <li>OTHER</li> </ul> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, lastName will be ignored if provided.",
+					"type": "string"
+				},
+				"middleName": {
+					"description": "The middle name for the specified entity.<br/> <br/> Max Length: 31 <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, middleName will be ignored if provided.",
+					"type": "string"
+				},
+				"namePrefix": {
+					"description": "Name prefix.<br/> <br/> Max Length: 8 <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, namePrefix will be ignored if provided.",
+					"type": "string"
+				},
+				"nameSuffix": {
+					"description": "Name suffix.<br/> <br/> Max Length: 8 <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, nameSuffix will be ignored if provided.",
+					"type": "string"
+				},
+				"relationText": {
+					"description": "The text describing the relationship of a beneficiary to the shareowner. <br/> <br/> Valid Values: <ul> <li>CHILD</li> <li>OTHER</li> <li>PARENT</li> <li>SIBLING</li> <li>SPOUSE</li> <li>WIDOW</li> <li>ENTITY</li> <li>PER_STIRPES</li> <li>PER_CAPITA</li> <li>PER_CAPITA_EACH_GENERATION</li> </ul>",
+					"type": "string"
+				},
+				"taxIdentification": {
+					"description": "Tax ID details associated with the specified entry.",
+					"$ref": "#/definitions/BeneficiaryTaxIdentification"
+				},
+				"transferOnDeathDistributionType": {
+					"description": "Indicates how shares of a mutual fund position will be distributed to the position's designated beneficiaries upon the demise of the shareowner if one or more of the beneficiaries are already dead.<br/> <br/> Valid Values: <ul> <li>LDPS</li> <li>PER_CAPITA</li> <li>NOT_APPLICABLE</li> </ul> <br/> <br/> Notes: For fiduciary accounts, value must be NOT_APPLICABLE.",
+					"type": "string"
+				}
+			}
+		},
+		"Establish529": {
+			"properties": {
+				"lastName": {
+					"description": "Last name or name of an organization.<br/> <br/>  Notes: Required if <b>transactionType</b> is ESTABLISH_529 and must be the last name of the primary account owner.",
+					"type": "string"
+				},
+				"studentDateOfBirth": {
+					"description": "Student birth date.<br/> <br/>  Format: YYYY-MM-DD<br/><br/>  Required if <b>transactionType</b> is ESTABLISH_529.",
+					"type": "string"
+				},
+				"studentTaxId": {
+					"description": "The unique number assigned by the IRS for a student.<br/> <br/>  Required if <b>transactionType</b> is ESTABLISH_529.",
+					"type": "string"
+				},
+				"tuitionSavingsPlanEnrollmentDate": {
+					"description": "Tuition Savings Plan Enrollment Date.<br/> <br/> Format: YYYY-MM-DD <br/> <br/> Required if <b>transactionType</b> is ESTABLISH_529.",
+					"type": "string"
+				}
+			}
+		},
+		"AccountTypesCustomerRole": {
+			"properties": {
+				"customerRole": {
+					"description": "Defines the role(s) the registered customer has to the account. <br/> <br/> Valid Values: <ul> <li>ACCOUNT_NUMBER_TEXT</li> <li>ACCOUNT_NUMBER_VARIABLE</li> <li>ADMINISTRATOR_TEXT</li> <li>AGE_VARIABLE</li> <li>AND_TEXT</li> <li>BENEFICIARY</li> <li>CONTINGENT_BENEFICIARY</li> <li>COMMUNITY_PROPERTY</li> <li>CONSERVATORSHIP_TEXT</li> <li>CONNECTOR</li> <li>CONTRIBUTION_YEAR</li> <li>CUSTODIAN</li> <li>CUSTODIAN_TEXT</li> <li>CONVERSION_YEAR</li> <li>DATE_VARIABLE</li> <li>DECEASED_DATE</li> <li>DECENDENT</li> <li>DATED_TEXT</li> <li>EDUCATION_IRA</li> <li>EXECUTOR_TEXT</li> <li>FBO_TEXT</li> <li>FIDUCIARY_TEXT</li> <li>OWNER_FIVE</li> <li>OWNER_FOUR</li> <li>GUARDIAN</li> <li>GUARDIAN_TEXT</li> <li>GRANTOR</li> <li>HOUSE_FIDUCIARY_TEXT</li> <li>HOUSE_FIDUCIARY</li> <li>IRA</li> <li>JTWROS</li> <li>MATURITY_DATE</li> <li>MINOR</li> <li>MINOR_TEXT</li> <li>MARITAL_PROPERTY</li> <li>OWNER_TEXT</li> <li>SUCCESSOR_OWNER</li> <li>ORGANIZATION</li> <li>OPTIONAL_TEXT_ONE</li> <li>OPTIONAL_TEXT_TEN</li> <li>OPTIONAL_TEXT_TWO</li> <li>OPTIONAL_TEXT_THREE</li> <li>OPTIONAL_TEXT_FOUR</li> <li>OPTIONAL_TEXT_FIVE</li> <li>OPTIONAL_TEXT_SIX</li> <li>OPTIONAL_TEXT_SEVEN</li> <li>OPTIONAL_TEXT_EIGHT</li> <li>OPTIONAL_TEXT_NINE</li> <li>PARTNERSHIP</li> <li>PLAN_NAME_TEXT</li> <li>PAY_ON_DEATH_TEXT</li> <li>PERSONAL_REPRESENTATIVE</li> <li>PRIMARY</li> <li>PERSONAL_REPRESENTATIVE_TEXT</li> <li>ROTH_IRA_CONVERSION_IRA</li> <li>RETIREMENT_PARTICIPANT</li> <li>ROLLOVER_IRA_TEXT</li> <li>ROTH_IRA</li> <li>SASP_TEXT</li> <li>SELF_DIRECTED_IRA_TEXT</li> <li>SECONDARY</li> <li>SEPARATE_PROPERTY_TEXT</li> <li>SOLE_PROPIETORSHIP</li> <li>STATE_VARIABLE</li> <li>SUCCESSOR_CUSTODIAN</li> <li>SUCCESSOR_CUSTODIAN_TEXT</li> <li>SUCCESSOR_TRUSTEE</li> <li>TBE</li> <li>OWNER_THREE</li> <li>TIC</li> <li>TRANSFER_ON_DEATH_TEXT</li> <li>TRADE_AUTHORITY</li> <li>TRUST</li> <li>STATE_TEXT</li> <li>OWNER</li> <li>TRUST_TYPE_VARIABLE</li> <li>TRUSTEE</li> <li>TRUSTEE_TEXT</li> <li>OWNER_TWO</li> <li>UA_TEXT</li> <li>UNDER_AGREEMENT_DATE</li> <li>UGMA</li> <li>UNDER_AGREEMENT_TEXT</li> <li>UNTIL_TEXT</li> <li>UTMA</li> <li>UW_TEXT</li> <li>CUSTOMER_TEXT</li> <li>SUCCESSOR_TEXT</li> <li>ULTIMATE_BENEFICIAL_OWNER</li> </ul>",
+					"type": "string"
+				},
+				"customerRoleAbbreviatedName": {
+					"description": "Customer role abbreviated name.<br/><br/> Max Length: 4",
+					"type": "string"
+				},
+				"customerRoleId": {
+					"description": "Unique ID of customer role.<br/> <br/> Format: 0 to 95",
+					"format": "int32",
+					"type": "integer"
+				},
+				"customerRoleShortName": {
+					"description": "Customer role short name.<br/><br/> Max Length: 10",
+					"type": "string"
+				},
+				"hasHouseFiduciaryCustodianOverride": {
+					"description": "If true, a house fiduciary custodian identified by the fund sponsor will be used for the customer role.<br/> If false, a provided customer will be used for the customer role.",
+					"type": "boolean"
+				},
+				"isAuthorizedForNCOAUpdates": {
+					"description": "If true, customer associated with this role is authorized to make National Change of Address (NCOA) updates.",
+					"type": "boolean"
+				},
+				"isCustomerIdentificationProcessExcluded": {
+					"description": "If true, the customer associated with this role will be excluded from Customer Identification Process (CIP).",
+					"type": "boolean"
+				},
+				"isMailingWindowDisplayExcluded": {
+					"description": "If true, the customer name associated with this role will be excluded from the list of customer names in the mailing window.",
+					"type": "boolean"
+				},
+				"isNonresidentAlienWithholdingEvaluationExcluded": {
+					"description": "If true, the customer associated with this role will be excluded from the Nonresident Alien (NRA) withholding evaluation process.",
+					"type": "boolean"
+				},
+				"isTaxResponsibleRole": {
+					"description": "If true, the customer role will be tax responsible.",
+					"type": "boolean"
+				},
+				"isTuitionSavingsPlanBeneficiary": {
+					"description": "If true, the customer associated with this role is the beneficial owner of a College Tuition Savings Plan.<br/> <br/> <b>Notes:</b><br/> If true, the value of <b>minimumCustomerCount</b> and <b>maximumCustomerCount</b> must be 1.",
+					"type": "boolean"
+				},
+				"maximumCustomerCount": {
+					"description": "The maximum number of times the customer role is required for the account type.<br/><br/> Max Length: 3",
+					"format": "int32",
+					"type": "integer"
+				},
+				"minimumCustomerCount": {
+					"description": "The minimum number of times the customer role is required for the account type.<br/><br/> Max Length: 3",
+					"format": "int32",
+					"type": "integer"
+				}
+			}
+		},
+		"AccountsNasuPhoneInformation": {
+			"required": [
+				"phoneNumberText"
+			],
+			"properties": {
+				"contactMediumType": {
+					"description": "Indicates the type of contact medium used to transfer information between two entities. <br/> </br/> Valid Values: <ul> <li>FAX</li> <li>TDD</li> <li>PHONE</li> </ul> <br/> <br/> Notes: TDD = Telephone Communication Device for the Deaf <br/> <br/> Example: When identified contact medium is a phone number, this value describes the type of phone number.",
+					"type": "string"
+				},
+				"contactTimeframe": {
+					"description": "Preferred contact time frame.<br/> </br/> Valid Values: <ul> <li>DAY</li> <li>EVENING</li> <li>DAY_AND_EVENING</li> <li>UNKNOWN</li> </ul>",
+					"type": "string"
+				},
+				"internalConnectionNumber": {
+					"description": "Required number to complete internal system connection after the telephone call is answered.<br/> <br/> Example: Extension Number",
+					"type": "string"
+				},
+				"phoneNumberText": {
+					"description": "The text representation of the phone number. <br/> <br/>Max Length: 10<br/><br/> Notes: Populated when numberType = UNFORMATTED. <br/> <br/> Example: 9999999999, 999-999-9999, or 999-99-99999",
+					"type": "string"
+				}
+			}
+		},
+		"BeneficiaryTaxIdentification": {
+			"properties": {
+				"taxId": {
+					"description": "A unique number assigned by the IRS to identify a taxable entity. <br/> <br/> Max Length: 9<br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, taxId will be defaulted to 0. Value will be ignored if provided.",
+					"type": "string"
+				},
+				"taxIdType": {
+					"description": "Indicates the type of Tax ID.<br/> </br/> Valid Values: <ul> <li>SSN</li> <li>EIN</li> <li>UNKNOWN</li> </ul> <br/> <br/> Notes: If relationText = PER_STIRPES, PER_CAPITA, or PER_CAPITA_EACH_GENERATION, taxIdType will be defaulted to Unknown. Value will be ignored if provided.",
+					"type": "string"
+				}
+			}
+		},
+		"AccountTypesRolesResponseDTO": {
+			"properties": {
+				"customerRoles": {
+					"description": "List of customer roles.",
+					"items": {
+						"$ref": "#/definitions/AccountTypesCustomerRole"
+					},
+					"type": "array"
+				},
+				"errorList": {
+					"description": "",
+					"items": {
+						"$ref": "#/definitions/ErrorBean"
+					},
+					"type": "array"
+				}
+			}
+		},
+		"AccountsNasuPositionIdBean": {
+			"properties": {
+				"positionId": {
+					"description": "A position is the amount of shares held in a specific investment vehicle. Position ID is an identifier of that position for the individual investor. It is possible for an investor to own shares in multiple investment vehicles. Each of these investments would be represented by different Position IDs.<br/> <br/> Format: Fund Code (Max 7 digits) + '|' + Account Number (Max 11 digits)<br/> <br/> Example: 9999999|99999999999",
+					"type": "string"
+				}
+			}
+		},
+		"FundsResponseDTO": {
+			"properties": {
+				"errorList": {
+					"description": "",
+					"items": {
+						"$ref": "#/definitions/ErrorBean"
+					},
+					"type": "array"
+				},
+				"fundProfile": {
+					"description": "List of fund summary details.",
+					"items": {
+						"$ref": "#/definitions/FundSummary"
+					},
+					"type": "array"
+				}
+			}
+		},
+		"AccountsNasuResponseDTO": {
+			"properties": {
+				"cumulativeDiscount": {
+					"description": "Unique ID for rights of accumulation pricing.",
+					"format": "int32",
+					"type": "integer"
+				},
+				"cumulativeDiscountAssignment": {
+					"description": "Indicates whether the service assigned a cumulative discount number.<br/> <br/> Valid Values: <ul> <li>EXISTING</li> <li>NEW</li> <li>NOT_APPLICABLE</li> </ul>",
+					"type": "string"
+				},
+				"errorList": {
+					"description": "",
+					"items": {
+						"$ref": "#/definitions/ErrorBean"
+					},
+					"type": "array"
+				},
+				"letterOfIntentNumber": {
+					"description": "A unique ID that identifies a Letter of Intent (LOI) agreement.",
+					"format": "int32",
+					"type": "integer"
+				},
+				"positions": {
+					"description": "List of positions for the account.",
+					"items": {
+						"$ref": "#/definitions/AccountsNasuPositionIdBean"
+					},
+					"type": "array"
+				},
+				"taxResponsibleCustomer": {
+					"description": "Tax responsible customer details.",
+					"$ref": "#/definitions/AccountsNasuTaxResponsibleCustomer"
+				}
+			}
+		},
+		"AccountsNasuRequestDTO": {
+			"required": [
+				"fundSponsorId",
+				"accountTypeId",
+				"accountType",
+				"socialCode",
+				"isTuitionSavingsPlan",
+				"accountControlLevelText",
+				"citizenPostalCode",
+				"isTransferOnDeathBeneficiaryEligible",
+				"isUsingDefaultCertificationText"
+			],
+			"properties": {
+				"accountControlLevelText": {
+					"description": "Indicates the text that describes the account control level.<br/> <br/>  Valid Values: <ul> <li>NON_NETWORKING</li> <li>BROKER_MARGIN_IRA_ACCOUNT</li> <li>CUSTOMER_NAMED_BROKER_ACCOUNT</li> <li>BROKERAGE_BROKER_ACCOUNT</li> <li>BROKERAGE_FUND_ACCOUNT</li> </ul>",
+					"type": "string"
+				},
+				"accountNumber": {
+					"description": "A number that identifies an investor's position within a fund.<br/><br/>Max Length: 11",
+					"format": "int64",
+					"type": "integer"
+				},
+				"accountType": {
+					"description": "Indicates the new account registration classification.<br/> </br/> Valid Values: <ul> <li>FREE_FORMAT</li> <li>SINGLE</li> <li>JOINT</li> <li>UGMA_UTMA</li> <li>FIDUCIARY</li> <li>FREE_FORMAT_FIDUCIARY</li> </ul>",
+					"type": "string"
+				},
+				"accountTypeId": {
+					"description": "Unique ID for a fund sponsor legal ownership account type.<br/><br/>Max Length: 23",
+					"type": "string"
+				},
+				"beneficiaries": {
+					"description": "List of beneficiaries. <br/> <br/> Notes: This information is not required when isTuitionSavingsPlan is true.<br/><br/>Max Size: 8",
+					"items": {
+						"$ref": "#/definitions/AccountsNasuBeneficiary"
+					},
+					"type": "array"
+				},
+				"brokerIdentificationNumber": {
+					"description": "The external account number used by the financial institution. <br/> <br/> Max Length:20<br/><br/>Notes: If provided, financialInstitutionId must also be provided. This data will propagate across all positions entries.",
+					"type": "string"
+				},
+				"citizenPostalCode": {
+					"description": "Citizen state abbreviation.<br/><br/>Max Length: 2",
+					"type": "string"
+				},
+				"customers": {
+					"description": "List of customer information.",
+					"items": {
+						"$ref": "#/definitions/AccountsNasuCustomerBean"
+					},
+					"type": "array"
+				},
+				"defaultCertificationCode": {
+					"description": "Indicates the default status code of the SSN. <br/> <br/> Valid values: <ul> <li>0-9</li> </ul> Notes: <ul> <li>0 = SSN_MISSING</li> <li>1 = SSN_NON_CERTIFIED</li> <li>2 = SSN_CERTIFIED</li> <li>3 = TIN_NON_CERTIFIED</li> <li>4 = TIN_CERTIFIED</li> <li>5 = SSN_APPLIED</li> <li>6 = SSN_IRS_OFFENDER</li> <li>7 = TIN_IRS_OFFENDER</li> <li>8 = SSN_ACCOUNT_TYPE_EXEMPT</li> <li>9 = TIN_ACCOUNT_TYPE_EXEMPT</li> </ul><br/>Required when isUsingCertificationText = true",
+					"type": "string"
+				},
+				"errors": {
+					"description": "",
+					"items": {
+						"$ref": "#/definitions/ErrorBean"
+					},
+					"type": "array"
+				},
+				"financialInstitutionBranchId": {
+					"description": "Unique ID for the financial institution branch.<br/> <br/> Note: This data will propagate across all positions entries.",
+					"type": "string"
+				},
+				"financialInstitutionId": {
+					"description": "Unique ID for a Financial Institution. <br/> <br/> Notes: If value is not provided, this will be set to a default dealer. This data will propagate across all positions entries.",
+					"format": "int32",
+					"type": "integer"
+				},
+				"isTransferOnDeathBeneficiaryEligible": {
+					"description": "If true, the account type is eligible for designation of transfer on death beneficiary information.",
+					"type": "boolean"
+				},
+				"isTuitionSavingsPlan": {
+					"description": "If true, the fund is a Tuitions Savings Plan (529) fund.",
+					"type": "boolean"
+				},
+				"isTuitionSavingsPlanExemptFromRolling": {
+					"description": "If true, the account is exempt from the Rolling of (age) Bands process established by the plan.",
+					"type": "boolean"
+				},
+				"isUsingDefaultCertificationText": {
+					"description": "If true, a default SSN status code for the account type will be used to establish the new account.<br/> <br/> Note: See <b>defaultCertificationCode</b> for details.",
+					"type": "boolean"
+				},
+				"positions": {
+					"description": "List of positions for the account.<br/><br/>Format: At least one entry is required",
+					"items": {
+						"$ref": "#/definitions/AccountsNasuPosition"
+					},
+					"type": "array"
+				},
+				"representativeId": {
+					"description": "Unique ID for the representative.<br/> <br/>Max Length: 9<br/><br/> Notes: This data will propagate across all positions entries.",
+					"type": "string"
+				},
+				"representativeName": {
+					"description": "The representative name.<br/> <br/>Max Length: 30<br/><br/> Notes: This data will propagate across all positions entries.",
+					"type": "string"
+				},
+				"socialCode": {
+					"description": "Identifies the type of account.<br/> <br/> Max 3 digits <br/> </br/> Example: IRA Account",
+					"type": "string"
+				},
+				"tuitionSavingsPlanEnrollmentDate": {
+					"description": "Tuition Savings Plan enrollment date.<br/> <br/> Format: YYYY-MM-DD",
+					"type": "string"
+				}
+			}
+		},
+		"AccountTypesEntitlementsResponseDTO": {
+			"properties": {
+				"errorList": {
+					"description": "",
+					"items": {
+						"$ref": "#/definitions/ErrorBean"
+					},
+					"type": "array"
+				},
+				"hasEstablishNewBankInstruction": {
+					"description": "If true, a new bank wire instruction can be established.",
+					"type": "boolean"
+				},
+				"hasInitialInvestmentManualCheckPayment": {
+					"description": "If true, the shareowner can send a manual check payment for the initial investment during new account setup.",
+					"type": "boolean"
+				},
+				"hasPayrollDeductionContribution": {
+					"description": "If true, the Payroll Deduction Contribution NASU's are allowed.",
+					"type": "boolean"
+				},
+				"hasRealTimeNewAccountSetUp": {
+					"description": "If true, a new account setup can be opened real time without having the initial supporting documents.",
+					"type": "boolean"
+				},
+				"hasReducedMinimumAutomaticInvestmentPlan": {
+					"description": "Indicates whether the FAN client allows a reduced minimum amount in the automatic investment plan for the specific account type.",
+					"type": "boolean"
+				},
+				"hasReducedMinimumFunctionality": {
+					"description": "If true, the fund sponsor allows the purchase amount into a new position to be less than the fund minimum purchase amount for the specific account type.",
+					"type": "boolean"
+				},
+				"hasRollover": {
+					"description": "If true, the transfer agency authorizes shareowner to process rollover to existing transactions.",
+					"type": "boolean"
+				},
+				"hasSelectExistingBank": {
+					"description": "If true, the shareowner can select the bank from a list of existing banks during new account setup.",
+					"type": "boolean"
+				},
+				"hasTransferOfAssetsFunding": {
+					"description": "If true, a new account setup can be funded from a transfer of assets.",
+					"type": "boolean"
+				}
+			}
+		},
+		"ErrorBean": {
+			"properties": {
+				"ERROR": {
+					"description": "",
+					"type": "string"
+				},
+				"INFO": {
+					"description": "",
+					"type": "string"
+				},
+				"WARNING": {
+					"description": "",
+					"type": "string"
+				},
+				"errorCode": {
+					"description": "",
+					"type": "string"
+				},
+				"errorMessage": {
+					"description": "",
+					"type": "string"
+				},
+				"errorSeverity": {
+					"description": "",
+					"type": "string"
+				},
+				"field": {
+					"description": "",
+					"type": "string"
+				},
+				"objectName": {
+					"description": "",
+					"type": "string"
+				},
+				"rejectedValue": {
+					"description": "",
+					"type": "string"
+				}
+			}
+		},
+		"FundsNewPositionsSummaryRequestDTO": {
+			"required": [
+				"transactionType",
+				"fundSponsorId"
+			],
+			"properties": {
+				"accountTypeId": {
+					"description": "Unique ID for a fund sponsor legal ownership account type.<br/> <br/>  Notes: Required if <b>transactionType</b> is ESTABLISH.<br/>  Value is obtained from the /fund-sponsors/{fundSponsorId}/accountTypes/summary API.",
+					"type": "string"
+				},
+				"errors": {
+					"description": "",
+					"items": {
+						"$ref": "#/definitions/ErrorBean"
+					},
+					"type": "array"
+				},
+				"establish529": {
+					"description": "Establish 529 new position information.",
+					"$ref": "#/definitions/Establish529"
+				},
+				"isFiduciaryAccount": {
+					"description": "If true, the position is fiduciary (529 or retirement).<br/> <br/>  Notes: This field is used when <b>transactionType</b> is ESTABLISH.",
+					"type": "boolean"
+				},
+				"positionId": {
+					"description": "A position is the amount of shares held in a specific investment vehicle. Position ID is an identifier of that position for the individual investor. It is possible for an investor to own shares in multiple investment vehicles. Each of these investments would be represented by different Position IDs.<br/> <br/>  Format: Fund Code (Max 7 digits) + '|' + Account Number (Max 11 digits)<br/> <br/>  Example: 9999999|99999999999<br/> <br/>  Notes: Required if <b>transactionType</b> is EXCHANGE or PURCHASE.",
+					"type": "string"
+				},
+				"postalCode": {
+					"description": "State/country abbreviation.<br/> <br/>  Notes: Required if <b>transactionType</b> is ESTABLISH or ESTABLISH_529.",
+					"type": "string"
+				},
+				"socialCode": {
+					"description": "Identifies the type of account.<br/> <br/>  Max 3 digits<br/> <br/>  Example: IRA Account<br/> <br/>  Notes: Required if <b>transactionType</b> is ESTABLISH or ESTABLISH_529.<br/>",
+					"type": "string"
+				},
+				"transactionType": {
+					"description": "Indicates transaction type.<br/> <br/> Valid Values: <ul> <li>EXCHANGE</li> <li>PURCHASE</li> <li>ESTABLISH</li> <li>ESTABLISH_529</li> </ul>",
+					"type": "string",
+					"enum": [
+						"EXCHANGE",
+						"PURCHASE",
+						"ESTABLISH",
+						"ESTABLISH_529"
+					]
+				}
+			}
+		},
+		"FundSummary": {
+			"properties": {
+				"fundFamilyID": {
+					"description": "An ID used to link all funds in the same family.<br/> <br/> Notes: The value should exactly match for all fund names in the same family.",
+					"type": "string"
+				},
+				"fundID": {
+					"description": "Unique ID for a fund.",
+					"type": "string"
+				},
+				"iciInvestmentObjectiveID": {
+					"description": "ID for the Mutual Fund investment objective.",
+					"type": "string"
+				},
+				"iciInvestmentObjectiveText": {
+					"description": "Description of Mutual Fund investment objective.<br/> <br/> Max Length: 35",
+					"type": "string"
+				},
+				"liquidityFeeApplied": {
+					"description": "Indicates whether a liquidity fee is in effect and may be applied to a financial transaction based on the characteristics of the trade.<br/> <br/> Valid Values: <ul> <li>Yes</li> <li>No</li> <li>N/A</li> </ul>",
+					"type": "string",
+					"enum": [
+						"Y",
+						"N",
+						"Z"
+					]
+				},
+				"liquidityFeeRate": {
+					"description": "The rate of the liquidity fee imposed on the fund.<br/> <br/> Max 17 digits with max 10 decimal points.",
+					"format": "double",
+					"type": "number"
+				},
+				"liquidityGateApplied": {
+					"description": "Indicates whether a liquidity gate is in effect and may be applied to a financial transaction based on the characteristics of the trade.<br/> <br/> Valid Values: <ul> <li>Yes</li> <li>No</li> <li>N/A</li> </ul>",
+					"type": "string",
+					"enum": [
+						"Y",
+						"N",
+						"Z"
+					]
+				},
+				"multiDayPricing": {
+					"description": "Indicates whether the fund applies multiple prices within the same calendar day.<br/> <br/> Valid Values: <ul> <li>Yes</li> <li>No</li> <li>Previous</li> </ul>",
+					"type": "string",
+					"enum": [
+						"Y",
+						"N",
+						"P"
+					]
+				},
+				"mutualFundName": {
+					"description": "Mutual Fund name.",
+					"type": "string"
+				},
+				"mutualFundPortfolioID": {
+					"description": "Unique ID for a Mutual Fund portfolio.<br/> <br/> Portfolio is a fund operated by an investment company that combines the money of many persons whose investment goals are similar.",
+					"format": "int32",
+					"type": "integer"
+				},
+				"mutualFundPortfolioLongName": {
+					"description": "Mutual Fund portfolio long name.",
+					"type": "string"
+				},
+				"mutualFundShortName": {
+					"description": "Mutual Fund short name.",
+					"type": "string"
+				},
+				"netAssetValuePrice": {
+					"description": "The value per share in the Mutual Fund that is derived periodically.<br/> <br/> Max 11 digits with max 4 decimal points.",
+					"format": "double",
+					"type": "number"
+				},
+				"previousDayNAVPriceChangeAmount": {
+					"description": "The difference in the per share value between the specified request date and the prior day.<br/> <br/> Max 11 digits with max 4 decimal points.",
+					"format": "double",
+					"type": "number"
+				},
+				"previousDayNAVPriceChangeRate": {
+					"description": "Calculated percent change between the per share value between the specified request date and the prior day.<br/> <br/> Max 17 digits with max 10 decimal points.",
+					"format": "double",
+					"type": "number"
+				},
+				"previousNetAssetValuePrice": {
+					"description": "The amount that represents the per share value in the Mutual Fund for the previous business day.",
+					"format": "double",
+					"type": "number"
+				},
+				"previousPriceDate": {
+					"description": "The date used to obtain price information for the previous business day.<br/> <br/> Format: MM/DD/YYYY",
+					"format": "date",
+					"type": "string"
+				},
+				"previousPriceTime": {
+					"description": "The price time applied to the Mutual Fund for the previous business day.<br/> <br/> Format: HH:MM",
+					"format": "date",
+					"type": "string"
+				},
+				"priceDate": {
+					"description": "The date used to obtain price information.<br/> <br/> Format: MM/DD/YYYY",
+					"format": "date",
+					"type": "string"
+				},
+				"priceTime": {
+					"description": "The price time that will be applied to the Mutual Fund.<br/> <br/> Format: HH:MM",
+					"format": "date",
+					"type": "string"
+				},
+				"securityIssueID": {
+					"description": "Unique ID assigned by the SEC.<br/> <br/> Format: <ul> <li>Country Code - 2 bytes</li> <li>Issue ID - 9 bytes</li> <li>Issue Check digit - 1 byte</li> <li>Issue test code - 1 byte</li> </ul>",
+					"type": "string"
+				},
+				"shareClassAbbreviatedName": {
+					"description": "Share class abbreviated name.",
+					"type": "string"
+				},
+				"shareClassID": {
+					"description": "ID for share class.",
+					"format": "int32",
+					"type": "integer"
+				},
+				"shareClassLongText": {
+					"description": "Long name for a Mutual Fund share class.",
+					"type": "string"
+				},
+				"tickerSymbol": {
+					"description": "Unique ID assigned by the NASDAQ to the Mutual Fund to transmit price information.",
+					"type": "string"
+				}
+			}
+		},
+		"AccountsNasuPosition": {
+			"required": [
+				"fundId"
+			],
+			"properties": {
+				"clientDefinedField1": {
+					"description": "Client defined field1.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField2": {
+					"description": "Client defined field2.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField3": {
+					"description": "Client defined field3.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField4": {
+					"description": "Client defined field4.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField5": {
+					"description": "Client defined field5.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField6": {
+					"description": "Client defined field6.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField7": {
+					"description": "Client defined field7.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"clientDefinedField8": {
+					"description": "Client defined field8.<br/><br/>Max Length: 1",
+					"type": "string"
+				},
+				"fundId": {
+					"description": "Unique ID for a fund.<br/> <br/> Max Length:7",
+					"format": "int32",
+					"type": "integer"
+				},
+				"hasExpeditedExchange": {
+					"description": "If true, supports expedited exchange.<br/><br/>Format: Optional, default = TRUE",
+					"type": "boolean"
+				},
+				"hasTelephoneCheckRedemption": {
+					"description": "If true, allows redemption proceeds to be sent via check.<br/><br/>Format: Optional, default = TRUE",
+					"type": "boolean"
+				}
+			}
+		},
+		"AccountsNasuTaxResponsibleCustomer": {
+			"properties": {
+				"customerCertificationDateTime": {
+					"description": "The date and time the customer reviewed the registration information. <br/> <br/> Format: YYYY-MM-DD-HH.MM.SS.MMMMMM (date, time, hour, minute, second, millisecond)",
+					"type": "string"
+				},
+				"emailAddress": {
+					"description": "The address used to send information electronically to a specific mailbox.<br/> <br/> Max Length: 255",
+					"type": "string"
+				}
+			}
+		},
+		"FundNewSummary": {
+			"properties": {
+				"fund529Description": {
+					"description": "The text describing the College Tuition Savings Plan fund.<br/> <br/>  Notes: Populated only when <b>transactionType</b> is ESTABLISH_529.",
+					"type": "string"
+				},
+				"fund529SavingsPlanCategory": {
+					"description": "Category that identifies investment option of a Qualified Tuition Savings fund.<br/> <br/>  Valid Values: <ul> <li>UNCLASSIFIED</li> <li>AGE_BASED</li> <li>CONSERVATIVE</li> <li>MANAGED</li> <li>AGGRESSIVE</li> <li>OPTION</li> </ul>  Notes: Populated only when <b>transactionType</b> is ESTABLISH_529.",
+					"type": "string",
+					"enum": [
+						"UNCLASSIFIED",
+						"AGE_BASED",
+						"CONSERVATIVE",
+						"MANAGED",
+						"AGGRESSIVE",
+						"OPTION"
+					]
+				},
+				"fundFamilyID": {
+					"description": "An ID used to link all funds in the same family.<br/> <br/> Notes: The value should exactly match for all fund names in the same family.",
+					"type": "string"
+				},
+				"fundId": {
+					"description": "Unique ID for a fund.",
+					"format": "int32",
+					"type": "integer"
+				},
+				"fundName": {
+					"description": "Mutual Fund name.",
+					"type": "string"
+				},
+				"fundShortName": {
+					"description": "Mutual Fund short name.",
+					"type": "string"
+				},
+				"iciInvestmentObjectiveId": {
+					"description": "ID for the Mutual Fund investment objective.",
+					"type": "string"
+				},
+				"iciInvestmentObjectiveText": {
+					"description": "Description of Mutual Fund investment objective.<br/> <br/> Max Length: 35",
+					"type": "string"
+				},
+				"liquidityFeeApplied": {
+					"description": "Indicates whether a liquidity fee is in effect and may be applied to a financial transaction based on the characteristics of the trade.<br/> <br/> Valid Values: <ul> <li>YES</li> <li>NO</li> <li>NOT_APPLICABLE</li> </ul>",
+					"type": "string"
+				},
+				"liquidityFeeRate": {
+					"description": "The rate of the liquidity fee imposed on the fund.<br/> <br/> Max 17 digits with max 10 decimal points.",
+					"format": "double",
+					"type": "number"
+				},
+				"liquidityGateApplied": {
+					"description": "Indicates whether a liquidity gate is in effect and may be applied to a financial transaction based on the characteristics of the trade.<br/> <br/> Valid Values: <ul> <li>YES</li> <li>NO</li> <li>NOT_APPLICABLE</li> </ul>",
+					"type": "string"
+				},
+				"multiDayPricing": {
+					"description": "Indicates whether the fund applies multiple prices within the same calendar day.<br/> <br/> Valid Values: <ul> <li>YES</li> <li>NO</li> <li>PREVIOUS</li> </ul>",
+					"type": "string"
+				},
+				"mutualFundPortfolioId": {
+					"description": "Unique ID for a Mutual Fund portfolio.<br/> <br/> Portfolio is a fund operated by an investment company that combines the money of many persons whose investment goals are similar.",
+					"format": "int32",
+					"type": "integer"
+				},
+				"mutualFundPortfolioLongName": {
+					"description": "Mutual Fund portfolio long name.",
+					"type": "string"
+				},
+				"netAssetValuePrice": {
+					"description": "The amount that represents the per share value in the Mutual Fund.<br/> <br/> Max 11 digits with max 4 decimal points.<br/> <br/> Note: Decimal point and sign are included<br/> <br/> Ex: 99999.9999 or -99999.9999",
+					"format": "double",
+					"type": "number"
+				},
+				"previousDayNAVPriceChangeAmount": {
+					"description": "The difference in the per share value between the specified request date and the prior day.<br/> <br/> Max 11 digits with max 4 decimal points.<br/> <br/> Note: Decimal point and sign are included<br/> Ex: 99999.9999 or -99999.9999",
+					"format": "double",
+					"type": "number"
+				},
+				"previousDayNAVPriceChangeRate": {
+					"description": "Calculated percent change between the per share value between the specified request date and the prior day.<br/> <br/> Max 17 digits with max 10 decimal points.<br/> <br/> Note: Decimal point and sign are included<br/> Ex: 99999.9999999999 or -99999.9999999999",
+					"format": "double",
+					"type": "number"
+				},
+				"previousNetAssetValuePrice": {
+					"description": "The amount that represents the per share value in the Mutual Fund for the previous business day.<br/> <br/> Max 11 digits with max 4 decimal points.<br/> <br/> Note: Decimal point and sign are included<br/> Ex: 99999.9999 or -99999.9999",
+					"format": "double",
+					"type": "number"
+				},
+				"previousPriceDate": {
+					"description": "The date used to obtain price information for the previous business day.<br/> <br/> Format: YYYY-MM-DD",
+					"type": "string"
+				},
+				"previousPriceTime": {
+					"description": "The time used to obtain price information for the previous business day.<br/> <br/> Format: HH:MM",
+					"type": "string"
+				},
+				"priceDate": {
+					"description": "The date used to obtain price information.<br/> <br/> Format: YYYY-MM-DD",
+					"type": "string"
+				},
+				"priceTime": {
+					"description": "The time used to obtain price information.<br/> <br/> Format: HH:MM",
+					"type": "string"
+				},
+				"securityIssueID": {
+					"description": "Unique ID assigned by the SEC.<br/> <br/> Format: <ul> <li>Country Code - 2 bytes</li> <li>Issue ID - 9 bytes</li> <li>Issue Check digit - 1 byte</li> <li>Issue test code - 1 byte</li> </ul>",
+					"type": "string"
+				},
+				"shareClassAbbreviatedName": {
+					"description": "Share class abbreviated name.",
+					"type": "string"
+				},
+				"shareClassId": {
+					"description": "ID for share class.",
+					"format": "int32",
+					"type": "integer"
+				},
+				"shareClassLongText": {
+					"description": "Long name for a Mutual Fund share class.",
+					"type": "string"
+				},
+				"tickerSymbol": {
+					"description": "Unique ID assigned by the NASDAQ to the Mutual Fund to transmit price information.",
+					"type": "string"
+				}
+			}
+		},
+		"AccountsNasuTaxIdentification": {
+			"required": [
+				"taxId",
+				"taxIdType"
+			],
+			"properties": {
+				"certificationText": {
+					"description": "The text describing the status of the SSN.<br/> </br/> Valid Values: <ul> <li>SSN_MISSING</li> <li>SSN_NON_CERTIFIED</li> <li>SSN_CERTIFIED</li> <li>TIN_NON_CERTIFIED</li> <li>TIN_CERTIFIED</li> <li>SSN_APPLIED</li> <li>SSN_IRS_OFFENDER</li> <li>TIN_IRS_OFFENDER</li> <li>SSN_ACCOUNT_TYPE_EXEMPT</li> <li>TIN_ACCOUNT_TYPE_EXEMPT</li> </ul> Notes: If not provided, the value will be set based on client options.",
+					"type": "string"
+				},
+				"taxId": {
+					"description": "A unique number assigned by the IRS to identify a taxable entity.<br/><br/>Max Length: 9",
+					"type": "string"
+				},
+				"taxIdType": {
+					"description": "Indicates the type of Tax ID.<br/> </br/> Required when <b>taxId</b> is provided. <br/> <br/> Valid Values: <ul> <li>SSN</li> <li>ITIN</li> <li>EIN</li> <li>UNKNOWN</li> </ul>",
+					"type": "string"
+				}
+			}
+		},
+		"AccountTypesResponseDTO": {
+			"properties": {
+				"accountFundingRequirement": {
+					"description": "Indicates the entity that can fund or contribute to a 529 College Tuition Savings Plan Account.<br/> <br/> Valid Values: <ul> <li>OWNER</li> <li>BENEFICIARY</li> <li>BOTH</li> <li>NOT_APPLICABLE</li> </ul>",
+					"type": "string",
+					"enum": [
+						"OWNER",
+						"BENEFICIARY",
+						"BOTH",
+						"NOT_APPLICABLE"
+					]
+				},
+				"accountType": {
+					"description": "Indicates the new account registration classification.<br/> <br/> Valid Values: <ul> <li>FREE_FORMAT</li> <li>SINGLE</li> <li>JOINT</li> <li>UGMA_UTMA</li> <li>FIDUCIARY</li> <li>FREE_FORMAT_FIDUCIARY</li> </ul>",
+					"type": "string",
+					"enum": [
+						"FREE_FORMAT",
+						"SINGLE",
+						"JOINT",
+						"UGMA_UTMA",
+						"FIDUCIARY",
+						"FREE_FORMAT_FIDUCIARY"
+					]
+				},
+				"accountTypeName": {
+					"description": "A name that identifies the fund sponsor legal ownership account type.",
+					"type": "string"
+				},
+				"defaultCertificationCode": {
+					"description": "Indicates the default status code of the SSN.<br/> <br/> Valid Values: <ul> <li>0-9</li> </ul> <br/> <br/> Notes: <ul> <li>0 = MISSING</li> <li>1 = SSN_NON_CERTIFIED</li> <li>2 = SSN_CERTIFIED</li> <li>3 = TIN_NON_CERTIFIED</li> <li>4 = TIN_CERTIFIED</li> <li>5 = SSN_APPLIED</li> <li>6 = SSN_IRS_OFFENDER</li> <li>7 = TIN_IRS_OFFENDER</li> <li>8 = SSN_ACCOUNT_TYPE_EXEMPT</li> <li>9 = TIN_ACCOUNT_TYPE_EXEMPT</li> </ul>",
+					"format": "int32",
+					"type": "integer"
+				},
+				"defaultCertificationText": {
+					"description": "Indicates the default text describing the status of the SSN.<br/> <br/> Valid Values: <ul> <li>MISSING</li> <li>SSN_NON_CERTIFIED</li> <li>SSN_CERTIFIED</li> <li>TIN_NON_CERTIFIED</li> <li>TIN_CERTIFIED</li> <li>SSN_APPLIED</li> <li>SSN_IRS_OFFENDER</li> <li>TIN_IRS_OFFENDER</li> <li>SSN_ACCOUNT_TYPE_EXEMPT</li> <li>TIN_ACCOUNT_TYPE_EXEMPT</li> </ul> Notes: See defaultCertificationCode for mapping to numeric values.",
+					"type": "string",
+					"enum": [
+						"MISSING",
+						"SSN_NON_CERTIFIED",
+						"SSN_CERTIFIED",
+						"TIN_NON_CERTIFIED",
+						"TIN_CERTIFIED",
+						"SSN_APPLIED",
+						"SSN_IRS_OFFENDER",
+						"TIN_IRS_OFFENDER",
+						"SSN_ACCOUNT_TYPE_EXEMPT",
+						"TIN_ACCOUNT_TYPE_EXEMPT"
+					]
+				},
+				"errorList": {
+					"description": "",
+					"items": {
+						"$ref": "#/definitions/ErrorBean"
+					},
+					"type": "array"
+				},
+				"hasBeneficiaryRequirement": {
+					"description": "If true, beneficiary information will be required when establishing a new account for this account type.",
+					"type": "boolean"
+				},
+				"hasCostBasisTracking": {
+					"description": "If true, the Fund Sponsor will track cost basis information for the specified account.",
+					"type": "boolean"
+				},
+				"hasJointCustomerPrompt": {
+					"description": "If true, Joint Customer's information is required for new accounts with specified account type.",
+					"type": "boolean"
+				},
+				"initialFundingRequirement": {
+					"description": "Indicates the type of initial funding transaction is required.<br/> <br/> Valid Values: <ul> <li>INITIAL_PURCHASE</li> <li>SYSTEMATIC_PURCHASE_AGREEMENT</li> <li>NEITHER</li> </ul>",
+					"type": "string",
+					"enum": [
+						"INITIAL_PURCHASE",
+						"SYSTEMATIC_PURCHASE_AGREEMENT",
+						"NEITHER"
+					]
+				},
+				"isEducationalIra": {
+					"description": "If true, the account type is an Educational IRA.",
+					"type": "boolean"
+				},
+				"isTransferOnDeathBeneficiaryEligible": {
+					"description": "If true, the account type is eligible for designation of transfer on death beneficiary information.",
+					"type": "boolean"
+				},
+				"isTuitionSavingsPlan": {
+					"description": "If true, the Mutual Fund is allowed for Tuitions Savings Plan (529) investments.",
+					"type": "boolean"
+				},
+				"isUsingCertificationText": {
+					"description": "If true, SSN status code is being used.<br/> <br/> Note: See defaultCertificationCode for details.",
+					"type": "boolean"
+				},
+				"isUsingFundFiduciaryRegistrationLines": {
+					"description": "If true, the accountType is using the NASU Fiduciary Registration Line 1 & 2 from the Mutual Fund for the first two lines of registration text when setting up a 529 College Tuition Savings Plan.",
+					"type": "boolean"
+				},
+				"relationshipRoleCount": {
+					"description": "The maximum number of customerRole values required for this account type.",
+					"format": "int32",
+					"type": "integer"
+				},
+				"socialCode": {
+					"description": "Identifies the type of account that is being returned.<br/> <br/> Max 3 digits<br/> <br/> Example: IRA Account",
+					"format": "int32",
+					"type": "integer"
+				}
+			}
+		},
+		"AccountTypesSummaryResponseDTO": {
+			"properties": {
+				"accountTypes": {
+					"description": "List of account types.",
+					"items": {
+						"$ref": "#/definitions/AccountTypeSummary"
+					},
+					"type": "array"
+				},
+				"errorList": {
+					"description": "",
+					"items": {
+						"$ref": "#/definitions/ErrorBean"
+					},
+					"type": "array"
+				}
+			}
+		}
+	}
+}
