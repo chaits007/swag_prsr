@@ -51,5 +51,11 @@
 		    <artifactId>swagger-compat-spec-parser</artifactId>
 		    <version>1.0.41</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>4.0.1</version>
+		</dependency>
   </dependencies>
 </project>
