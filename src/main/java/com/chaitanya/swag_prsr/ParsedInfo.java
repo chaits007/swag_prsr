@@ -18,6 +18,7 @@ public class ParsedInfo {
 		parmInfo.parent = parent;
 		parmInfo.required = required;
 		parmInfo.parentType = parentType;
+		System.out.println("ParmInfo : " + parmInfo.parmType + " - " + parmInfo.parmName + " - " + parmInfo.parmDataType + " - " + parmInfo.required + " - " + parmInfo.parent + " - " + parmInfo.parentType);
 
 		parmList.add(parmInfo);
 	}
@@ -30,6 +31,7 @@ public class ParsedInfo {
 		parmInfo.required = required;
 		parmInfo.parent = "";
 		parmInfo.parentType = "";
+		System.out.println("ParmInfo : " + parmInfo.parmType + " - " + parmInfo.parmName + " - " + parmInfo.parmDataType + " - " + parmInfo.required + " - " + parmInfo.parent + " - " + parmInfo.parentType);
 
 		parmList.add(parmInfo);
 	}

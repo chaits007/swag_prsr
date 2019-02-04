@@ -65,6 +65,7 @@ public class App {
 				}
 
 				System.out.println("\n****************************************** Response Parameters *********************************************");
+				// Handle required fields from DTO
 				for (Map.Entry<String, Response> r : o.getValue().getResponses().entrySet()) {
 					System.out.println(" - " + r.getKey() + ": " + r.getValue().getDescription());
 					RefModel resp_mdl = (RefModel) r.getValue().getResponseSchema();
@@ -75,6 +76,8 @@ public class App {
 					for (Entry<String, Property> p1 : props.entrySet()) {
 						if (p1.getValue().getClass() == ArrayProperty.class) {
 							ArrayProperty temp = (ArrayProperty) p1.getValue();
+							parsedInfo.setParm("Response", p1.getKey(), p1.getValue().getType(), p1.getValue().getRequired(), "Array", "Start");
+							
 							if (temp.getItems().getClass() == RefProperty.class) {
 								RefProperty refP1 = (RefProperty) temp.getItems();
 								System.out.println(p1.getKey()	+ " - "	+ p1.getValue().getType() + " - Has Reference - " + refP1.getOriginalRef());
@@ -82,12 +85,12 @@ public class App {
 								Map<String, Property> propDefProp = propDef.getProperties();
 								for (Entry<String, Property> p2 : propDefProp.entrySet()) {
 									System.out.println(p2.getKey() + " - " + p2.getValue().getType());
-									parsedInfo.setParm("Response", p2.getKey(), p2.getValue().getType(), p2.getValue().getRequired(), "Array", "XXX");
+									parsedInfo.setParm("Response", p2.getKey(), p2.getValue().getType(), p2.getValue().getRequired(), p1.getKey(), "Array");
 								}
 							} else {
 								throw new NullPointerException("Not Ref Property - " + p1.getKey()	+ " - "	+ p1.getValue().getType());
 							}
-						} else if (p1.getValue().getType() == "ref") {
+						} else if (p1.getValue().getClass() == RefProperty.class) {
 							RefProperty refP1 = (RefProperty) p1.getValue();
 							System.out.println(p1.getKey()	+ " - "	+ p1.getValue().getType() + " - Has Reference - " + refP1.getOriginalRef());
 							Model propDef = swagger.getDefinitions().get(refP1.getSimpleRef());
@@ -103,9 +106,6 @@ public class App {
 					}
 				}
 			}
-			//*********************************
-			//Print the details of the API here
-			//*********************************
 			parsedInfo.writeParsedInfoToExcel();
 		}
 	}
