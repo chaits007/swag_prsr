@@ -82,14 +82,23 @@ public class App {
 								Map<String, Property> propDefProp = propDef.getProperties();
 								for (Entry<String, Property> p2 : propDefProp.entrySet()) {
 									System.out.println(p2.getKey() + " - " + p2.getValue().getType());
-									parsedInfo.setParm("Response", p2.getKey(), p2.getValue().getType(), "XXX", p2.getValue().getRequired());
+									parsedInfo.setParm("Response", p2.getKey(), p2.getValue().getType(), p2.getValue().getRequired(), "Array", "XXX");
 								}
 							} else {
 								throw new NullPointerException("Not Ref Property - " + p1.getKey()	+ " - "	+ p1.getValue().getType());
 							}
+						} else if (p1.getValue().getType() == "ref") {
+							RefProperty refP1 = (RefProperty) p1.getValue();
+							System.out.println(p1.getKey()	+ " - "	+ p1.getValue().getType() + " - Has Reference - " + refP1.getOriginalRef());
+							Model propDef = swagger.getDefinitions().get(refP1.getSimpleRef());
+							Map<String, Property> propDefProp = propDef.getProperties();
+							for (Entry<String, Property> p2 : propDefProp.entrySet()) {
+								System.out.println(p2.getKey() + " - " + p2.getValue().getType());
+								parsedInfo.setParm("Response", p2.getKey(), p2.getValue().getType(), p2.getValue().getRequired(), p1.getKey(), "Normal");
+							}
 						} else {
 							System.out.println(p1.getKey()	+ " - "	+ p1.getValue().getType());
-							parsedInfo.setParm("Response", p1.getKey(), p1.getValue().getType(), "XXX", p1.getValue().getRequired());
+							parsedInfo.setParm("Response", p1.getKey(), p1.getValue().getType(), p1.getValue().getRequired());
 						}	
 					}
 				}
@@ -100,20 +109,24 @@ public class App {
 			parsedInfo.writeParsedInfoToExcel();
 		}
 	}
+	
+	public static void processRequestParms(Parameter parm) {
+		
+	}
 
 	public static void processHeaderParms(HeaderParameter parm) {	
 		System.out.println(parm.getIn() + " - " + parm.getName());
-		parsedInfo.setParm(parm.getIn(), parm.getName(), parm.getType(), "",parm.getRequired());
+		parsedInfo.setParm(parm.getIn(), parm.getName(), parm.getType(), parm.getRequired());
 	}
 
 	public static void processPathParms(PathParameter parm) {
 		System.out.println(parm.getIn() + " - " + parm.getName());
-		parsedInfo.setParm(parm.getIn(), parm.getName(), parm.getType(), "",parm.getRequired());
+		parsedInfo.setParm(parm.getIn(), parm.getName(), parm.getType(), parm.getRequired());
 	}
 
 	public static void processQueryParms(QueryParameter parm) {
 		System.out.println(parm.getIn() + " - " + parm.getName());
-		parsedInfo.setParm(parm.getIn(), parm.getName(), parm.getType(), "",parm.getRequired());
+		parsedInfo.setParm(parm.getIn(), parm.getName(), parm.getType(), parm.getRequired());
 	}
 
 	public static void processBodyParms(BodyParameter parm) {
@@ -123,11 +136,12 @@ public class App {
 		ModelImpl definitions = (ModelImpl) swagger.getDefinitions().get(bodyModel.getSimpleRef());
 		List<String> reqd = definitions.getRequired();
 		Map<String, Property> props = definitions.getProperties();
-
+		
+		/* ************** Need to handle array in the body ********************** */
 		for (Entry<String, Property> p1 : props.entrySet()) {
 			boolean valReqd = reqd.contains(p1.getKey());
 			System.out.println(p1.getKey() + " - " + p1.getValue().getType());
-			parsedInfo.setParm(parm.getIn(), p1.getKey(), p1.getValue().getType(), "", valReqd);
+			parsedInfo.setParm(parm.getIn(), p1.getKey(), p1.getValue().getType(), valReqd);
 		}
 	}
 }

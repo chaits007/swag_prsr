@@ -5,5 +5,6 @@ public class ParmInfo {
 	String parmName;
 	String parmDataType;
 	String parent;
+	String parentType;
 	boolean required;
 }

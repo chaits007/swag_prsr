@@ -10,13 +10,26 @@ public class ParsedInfo {
 	private String OperationId;
 	private List <ParmInfo> parmList = new ArrayList<ParmInfo>();
 
-	public void setParm(String type, String name, String dataType, String parent, boolean required) {
+	public void setParm(String type, String name, String dataType, boolean required, String parent, String parentType) {
 		ParmInfo parmInfo = new ParmInfo();
 		parmInfo.parmType = type;
 		parmInfo.parmName = name;
 		parmInfo.parmDataType = dataType;
 		parmInfo.parent = parent;
 		parmInfo.required = required;
+		parmInfo.parentType = parentType;
+
+		parmList.add(parmInfo);
+	}
+	
+	public void setParm(String type, String name, String dataType, boolean required) {
+		ParmInfo parmInfo = new ParmInfo();
+		parmInfo.parmType = type;
+		parmInfo.parmName = name;
+		parmInfo.parmDataType = dataType;
+		parmInfo.required = required;
+		parmInfo.parent = "";
+		parmInfo.parentType = "";
 
 		parmList.add(parmInfo);
 	}
@@ -34,7 +47,6 @@ public class ParsedInfo {
 	
 	private void writeParsedInfo(ExcelHandler excelHandler, String type) {
 		for (ParmInfo parmInfo : parmList) {
-			System.out.println(parmInfo.parmType);
 			if (parmInfo.parmType == type) {
 				excelHandler.writeHeader(parmInfo.parmName);
 			}
